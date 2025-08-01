@@ -203,7 +203,7 @@ const WhyMeSection: React.FC = () => {
     <section className="relative bg-zinc-950 py-20 overflow-hidden">
       <BGPattern />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
