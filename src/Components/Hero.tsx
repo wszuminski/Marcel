@@ -1,8 +1,9 @@
 import { About } from "./About";
 import { Contact } from "./Contact";
 import { GallerySection } from "./Gallery";
-import { AuroraBackgroundDemo } from "./HeroAurora";
+// import { AuroraBackgroundDemo } from "./HeroAurora";
 import Navbar from "./Navbar";
+import ParallaxDemo from "./ParallaxHero";
 import { Pricing } from "./Pricing";
 import { Testimonials } from "./Testimonials";
 import { MetamorphosisSection } from "./Transformations";
@@ -18,11 +19,12 @@ export function Hero() {
       </div>
 
       {/* Hero Section with proper spacing for fixed navbar */}
-      <div className="relative">
-        <AuroraBackgroundDemo />
-      </div>
+      {/* <div className="relative"> */}
+      {/* <AuroraBackgroundDemo /> */}
+      {/* </div> */}
 
       {/* Other sections */}
+      <ParallaxDemo />
       <About />
       <WhyMeSectionDemo />
       <GallerySection />

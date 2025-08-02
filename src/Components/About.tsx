@@ -60,7 +60,7 @@ export function About() {
   ];
 
   return (
-    <section className="py-20 px-4 bg-zinc-950 relative overflow-hidden">
+    <section className="py-20 px-4 bg-gradient-to-b from-black to-zinc-950 to relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
