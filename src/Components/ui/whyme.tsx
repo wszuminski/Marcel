@@ -5,7 +5,6 @@ import {
   Trophy,
   Users,
   Clock,
-  Star,
   CheckCircle,
   Target,
   Heart,
@@ -16,14 +15,6 @@ interface Stat {
   number: string;
   label: string;
   icon: React.ElementType;
-}
-
-interface Testimonial {
-  name: string;
-  role: string;
-  content: string;
-  image: string;
-  rating: number;
 }
 
 interface Achievement {
@@ -37,36 +28,6 @@ const stats: Stat[] = [
   { number: "5+", label: "Years Experience", icon: Clock },
   { number: "98%", label: "Success Rate", icon: Trophy },
   { number: "24/7", label: "Support Available", icon: Heart },
-];
-
-const testimonials: Testimonial[] = [
-  {
-    name: "Sarah Johnson",
-    role: "Marketing Executive",
-    content:
-      "Lost 30 pounds in 4 months! The personalized approach made all the difference.",
-    image:
-      "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
-    rating: 5,
-  },
-  {
-    name: "Mike Chen",
-    role: "Software Engineer",
-    content:
-      "Finally found a trainer who understands my busy schedule. Results speak for themselves!",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-    rating: 5,
-  },
-  {
-    name: "Emily Rodriguez",
-    role: "Teacher",
-    content:
-      "The nutrition guidance was game-changing. I feel stronger and more confident than ever.",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-    rating: 5,
-  },
 ];
 
 const achievements: Achievement[] = [
@@ -147,36 +108,6 @@ const StatCard: React.FC<{ stat: Stat; index: number }> = ({ stat, index }) => {
     </motion.div>
   );
 };
-
-const TestimonialCard: React.FC<{
-  testimonial: Testimonial;
-  index: number;
-}> = ({ testimonial, index }) => (
-  <motion.div
-    initial={{ opacity: 0, x: 50 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.6, delay: index * 0.2 }}
-    className="bg-zinc-800/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 hover:border-purple-500/40 transition-all duration-300"
-  >
-    <div className="flex items-center mb-4">
-      <img
-        src={testimonial.image}
-        alt={testimonial.name}
-        className="w-12 h-12 rounded-full object-cover mr-4"
-      />
-      <div>
-        <h4 className="text-white font-semibold">{testimonial.name}</h4>
-        <p className="text-gray-400 text-sm">{testimonial.role}</p>
-      </div>
-    </div>
-    <div className="flex mb-3">
-      {[...Array(testimonial.rating)].map((_, i) => (
-        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-      ))}
-    </div>
-    <p className="text-gray-300 italic">"{testimonial.content}"</p>
-  </motion.div>
-);
 
 const AchievementCard: React.FC<{
   achievement: Achievement;
@@ -337,26 +268,6 @@ const WhyMeSection: React.FC = () => {
               <AchievementCard
                 key={achievement.title}
                 achievement={achievement}
-                index={index}
-              />
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Testimonials */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          <h3 className="text-3xl font-bold text-white mb-8 text-center">
-            What My Clients Say
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard
-                key={testimonial.name}
-                testimonial={testimonial}
                 index={index}
               />
             ))}

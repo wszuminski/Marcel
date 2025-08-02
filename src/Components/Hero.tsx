@@ -1,7 +1,13 @@
 import { About } from "./About";
+import { Contact } from "./Contact";
+import { GallerySection } from "./Gallery";
 import { AuroraBackgroundDemo } from "./HeroAurora";
 import Navbar from "./Navbar";
+import { Pricing } from "./Pricing";
+import { Testimonials } from "./Testimonials";
+import { MetamorphosisSection } from "./Transformations";
 import WhyMeSectionDemo from "./ui/whyme";
+import { TrainingVideosSection } from "./VideoSection";
 
 export function Hero() {
   return (
@@ -19,6 +25,12 @@ export function Hero() {
       {/* Other sections */}
       <About />
       <WhyMeSectionDemo />
+      <GallerySection />
+      <TrainingVideosSection />
+      <MetamorphosisSection />
+      <Pricing />
+      <Testimonials />
+      <Contact />
     </div>
   );
 }

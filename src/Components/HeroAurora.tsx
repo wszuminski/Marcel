@@ -31,9 +31,8 @@ export function AuroraBackgroundDemo() {
             >
               <Dumbbell className="w-3 h-3 sm:w-4 sm:h-4" />
               <span className="hidden sm:inline">
-                Certified Personal Trainer
+                Marcel Kaczmarek - Trener
               </span>
-              <span className="sm:hidden">Personal Trainer</span>
             </motion.div>
 
             {/* Main Heading */}
@@ -43,14 +42,14 @@ export function AuroraBackgroundDemo() {
               transition={{ delay: 0.3, duration: 0.8 }}
               className="text-[1.75rem] leading-[1.2] xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white"
             >
-              Transform Your{" "}
+              Zmień swoją{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-purple-600">
-                Body
+                Sylwetkę
               </span>
               <br />
-              Transform Your{" "}
+              Raz na{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-purple-600">
-                Life
+                Zawsze
               </span>
             </motion.h1>
 
@@ -164,19 +163,6 @@ export function AuroraBackgroundDemo() {
                     playsInline
                     controls={false}
                   />
-
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                  {/* Play Button Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <motion.div
-                      whileHover={{ scale: 1.1 }}
-                      className="w-12 h-12 xs:w-16 xs:h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-purple-500/90 rounded-full flex items-center justify-center cursor-pointer"
-                    >
-                      <Play className="w-6 h-6 xs:w-8 xs:h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-white ml-0.5 xs:ml-1" />
-                    </motion.div>
-                  </div>
                 </div>
               </div>
             </motion.div>

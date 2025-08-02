@@ -70,7 +70,7 @@ export default function Navbar() {
               </div>
             </div>
             <span className="text-lg sm:text-xl lg:text-2xl font-black text-white whitespace-nowrap">
-              Marcel Kaczmarek
+              Marcel Kaczmarski
               <br />
               <span className="text-purple-400">ONLINE COACHING</span>
             </span>

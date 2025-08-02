@@ -1,138 +1,155 @@
-import { Dumbbell, Trophy, Heart, Users, Target } from "lucide-react";
-import { GlowingEffect } from "./ui/about";
-import { cn } from "../lib/utils";
+import { Dumbbell, Trophy, Heart, Users, Target, Clock } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function About() {
+  const cards = [
+    {
+      icon: Trophy,
+      title: "Certyfikowany Trener",
+      description:
+        "NASM Certified Personal Trainer z specjalizacją w treningu siłowym i żywieniu sportowym",
+      color: "from-pink-500/20 to-pink-600/20",
+      iconColor: "text-pink-500",
+      borderColor: "border-pink-500/30",
+    },
+    {
+      icon: Users,
+      title: "500+ Transformacji",
+      description:
+        "Pomogłem setkom klientów osiągnąć ich cele - od redukcji wagi po przygotowanie do zawodów",
+      color: "from-indigo-500/20 to-indigo-600/20",
+      iconColor: "text-indigo-500",
+      borderColor: "border-indigo-500/30",
+    },
+    {
+      icon: Dumbbell,
+      title: "Spersonalizowane Plany",
+      description:
+        "Każdy program treningowy jest dopasowany do Twoich celów, poziomu sprawności i stylu życia",
+      color: "from-purple-500/20 to-purple-600/20",
+      iconColor: "text-purple-500",
+      borderColor: "border-purple-500/30",
+    },
+    {
+      icon: Heart,
+      title: "Holistyczne Podejście",
+      description:
+        "Fitness to więcej niż ćwiczenia - skupiam się na zdrowiu mentalnym i zrównoważonym stylu życia",
+      color: "from-red-500/20 to-pink-500/20",
+      iconColor: "text-red-500",
+      borderColor: "border-red-500/30",
+    },
+    {
+      icon: Clock,
+      title: "10+ Lat Doświadczenia",
+      description:
+        "Dekada pracy z klientami na każdym poziomie zaawansowania - od początkujących po zawodowców",
+      color: "from-green-500/20 to-green-600/20",
+      iconColor: "text-green-500",
+      borderColor: "border-green-500/30",
+    },
+    {
+      icon: Target,
+      title: "Twój Cel, Moja Misja",
+      description:
+        "Niezależnie od tego, czy zaczynasz swoją przygodę z fitnessem, czy dążysz do perfekcji - jestem tu dla Ciebie",
+      color: "from-cyan-500/20 to-cyan-500/20",
+      iconColor: "text-cyan-500",
+      borderColor: "border-cyan-500/30",
+    },
+  ];
+
   return (
-    <section className="py-16 px-4 bg-zinc-950">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            About Your Trainer
+    <section className="py-20 px-4 bg-zinc-950 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
+            Poznaj swojego{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+              Trenera
+            </span>
           </h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Transforming lives through personalized fitness journeys for over a
-            decade
+          <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+            Zmieniam życie poprzez spersonalizowane programy treningowe od ponad
+            dekady. Każda transformacja to unikalna historia sukcesu.
           </p>
+        </motion.div>
+
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {cards.map((card, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="group relative"
+            >
+              <div
+                className={`relative h-full p-[1px] rounded-2xl bg-gradient-to-br ${card.color} ${card.borderColor} border backdrop-blur-sm`}
+              >
+                <div className="relative h-full bg-gray-900/90 rounded-2xl p-6 transition-all duration-300 group-hover:bg-gray-900/70">
+                  {/* Glow effect on hover */}
+                  <div
+                    className="absolute inset-0 rounded-2xl bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+                    style={{
+                      background: `linear-gradient(to bottom right, ${card.iconColor}, transparent)`,
+                    }}
+                  />
+
+                  {/* Icon */}
+                  <div
+                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center mb-4`}
+                  >
+                    <card.icon className={`w-6 h-6 ${card.iconColor}`} />
+                  </div>
+
+                  {/* Content */}
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    {card.title}
+                  </h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    {card.description}
+                  </p>
+
+                  {/* Decorative element */}
+                  <div className="absolute top-0 right-0 w-20 h-20 opacity-5">
+                    <card.icon className="w-full h-full" />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">
-          <GridItem
-            area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
-            icon={<Trophy className="h-4 w-4" />}
-            title="Certified Excellence"
-            description="NASM Certified Personal Trainer with specializations in strength training and sports nutrition."
-            image="https://images.unsplash.com/photo-1584464457089-48184c4e2a6f?w=400&h=300&fit=crop"
-          />
-          <GridItem
-            area="md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]"
-            icon={<Users className="h-4 w-4" />}
-            title="500+ Success Stories"
-            description="Helped hundreds of clients achieve their fitness goals, from weight loss to competitive athletics."
-            image="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
-          />
-          <GridItem
-            area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
-            icon={<Dumbbell className="h-4 w-4" />}
-            title="Personalized Programs"
-            description="Every journey is unique. I create custom workout plans tailored to your goals, fitness level, and lifestyle."
-            stats={[
-              "10+ Years Experience",
-              "Custom Meal Plans",
-              "24/7 Support",
-            ]}
-            featured={true}
-          />
-          <GridItem
-            area="md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]"
-            icon={<Heart className="h-4 w-4" />}
-            title="Holistic Approach"
-            description="Fitness is more than just exercise. I focus on mental wellness, nutrition, and sustainable lifestyle changes."
-            image="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop"
-          />
-          <GridItem
-            area="md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]"
-            icon={<Target className="h-4 w-4" />}
-            title="Your Goals, My Mission"
-            description="Whether you're starting your fitness journey or pushing to the next level, I'm here to guide and motivate you every step of the way."
-            cta={true}
-          />
-        </ul>
+        {/* CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mt-16"
+        >
+          <p className="text-gray-400 mb-6">Gotowy na swoją transformację?</p>
+          <button className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
+            Rozpocznij swoją podróż
+          </button>
+        </motion.div>
       </div>
     </section>
   );
 }
-
-interface GridItemProps {
-  area: string;
-  icon: React.ReactNode;
-  title: string;
-  description: React.ReactNode;
-  image?: string;
-  stats?: string[];
-  featured?: boolean;
-  cta?: boolean;
-}
-
-const GridItem = ({
-  area,
-  icon,
-  title,
-  description,
-  image,
-  stats,
-  featured,
-}: GridItemProps) => {
-  return (
-    <li className={cn("min-h-[14rem] list-none", area)}>
-      <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-border p-2 md:rounded-[1.5rem] md:p-3">
-        <GlowingEffect
-          spread={40}
-          glow={true}
-          disabled={false}
-          proximity={64}
-          inactiveZone={0.01}
-          borderWidth={3}
-        />
-        <div
-          className={cn(
-            "relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-background p-6 shadow-sm dark:shadow-[0px_0px_27px_0px_rgba(45,45,45,0.3)] md:p-6",
-            featured && "bg-gradient-to-br from-purple-900/20 to-blue-900/20"
-          )}
-        >
-          {image && (
-            <div className="absolute inset-0 opacity-10">
-              <img src={image} alt="" className="w-full h-full object-cover" />
-            </div>
-          )}
-
-          <div className="relative flex flex-1 flex-col justify-between gap-3">
-            <div className="w-fit rounded-lg border-[0.75px] border-border bg-muted p-2">
-              {icon}
-            </div>
-
-            <div className="space-y-3">
-              <h3 className="pt-0.5 text-xl leading-[1.375rem] font-semibold font-sans tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance text-foreground">
-                {title}
-              </h3>
-              <h2 className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-muted-foreground">
-                {description}
-              </h2>
-
-              {stats && (
-                <div className="pt-4 space-y-2">
-                  {stats.map((stat, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full" />
-                      <span className="text-sm text-gray-300">{stat}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-  );
-};
