@@ -86,8 +86,8 @@ export function ParallaxComponent() {
               data-parallax-layer="3"
               className="absolute inset-0 flex items-center justify-center"
             >
-              <h2 className="text-6xl md:text-8xl font-bold text-white">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+              <h2 className="text-7xl md:text-9xl font-bold text-white">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">
                   Marcel Kaczmarski
                 </span>
               </h2>
