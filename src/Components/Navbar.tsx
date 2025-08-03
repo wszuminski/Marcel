@@ -37,7 +37,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Left Navigation */}
-          <div className="hidden lg:flex items-center space-x-6 ml-40 xl:space-x-8">
+          <div className="hidden lg:flex items-center space-x-6 ml-[16rem] xl:space-x-8">
             {navItems.slice(0, 2).map((item, index) => (
               <motion.a
                 key={item.href}
@@ -57,27 +57,12 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Centered Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-3 absolute left-1/2 transform -translate-x-1/2"
-          >
-            <div className="relative">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center">
-                <span className="text-zinc-900 font-black text-sm sm:text-base">
-                  TB
-                </span>
-              </div>
-            </div>
-            <span className="text-lg sm:text-xl lg:text-2xl font-black text-white whitespace-nowrap">
-              Marcel Kaczmarski
-              <br />
-              <span className="text-purple-400">ONLINE COACHING</span>
-            </span>
-          </motion.div>
+          <div className="flex items-center gap-3 absolute left-1/2 transform -translate-x-1/2">
+            <img src="/Logo.svg" alt="Logo" className="w-auto h-12" />
+          </div>
 
           {/* Right Navigation */}
-          <div className="hidden lg:flex items-center mr-40 space-x-6 xl:space-x-8">
+          <div className="hidden lg:flex items-center mr-[16rem] space-x-6 xl:space-x-8">
             {navItems.slice(2, 4).map((item, index) => (
               <motion.a
                 key={item.href}
