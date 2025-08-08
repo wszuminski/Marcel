@@ -1,237 +1,80 @@
 //@ts-nocheck
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Check,
-  Zap,
-  Crown,
-  Star,
-  ArrowRight,
-  Sparkles,
-  Shield,
-  Rocket,
-  Brain,
-  Users,
-  Globe,
-  AlertCircle,
-} from "lucide-react";
-
-// Types for better type safety and component reusability
-interface PricingTier {
-  name: string;
-  subtitle: string;
-  price: { monthly: number; yearly: number };
-  description: string;
-  icon: typeof Zap;
-  gradient: string;
-  borderGradient: string;
-  features: string[];
-  highlight: boolean;
-  badge: string | null;
-  ariaLabel?: string;
-}
-
-interface AdditionalFeature {
-  icon: typeof Brain;
-  title: string;
-  description: string;
-}
-
-interface PremiumPricingProps {
-  /** Custom pricing tiers to override defaults */
-  customTiers?: PricingTier[];
-  /** Custom additional features */
-  customFeatures?: AdditionalFeature[];
-  /** Callback when a plan is selected */
-  onPlanSelect?: (planName: string, isYearly: boolean) => void;
-  /** Custom CTA text */
-  ctaText?: string;
-  /** Show/hide additional features section */
-  showAdditionalFeatures?: boolean;
-  /** Show/hide FAQ/CTA section */
-  showCTASection?: boolean;
-  /** Custom discount percentage for yearly plans */
-  yearlyDiscountPercent?: number;
-}
+import { Check, ArrowRight } from "lucide-react";
 
 const pricingPlans = [
   {
-    name: "Starter",
-    subtitle: "Perfect for individuals",
-    price: { monthly: 29, yearly: 290 },
-    description: "Get started with AI-powered productivity tools",
-    icon: Zap,
+    name: "Start",
+    subtitle: "Idealny na początek",
+    price: 299,
+    description: "Podstawowy plan treningowy dla początkujących",
+
     gradient: "from-indigo-500/20 to-purple-500/20",
     borderGradient: "from-blue-400 to-cyan-400",
     features: [
-      "5 AI projects per month",
-      "Basic AI models access",
-      "Email support",
-      "Standard templates",
-      "1GB cloud storage",
-      "Basic analytics",
+      "4 treningi miesięcznie",
+      "Plan treningowy",
+      "Konsultacje dietetyczne",
+      "Wsparcie przez e-mail",
+      "Dostęp do aplikacji",
+      "Pomiary co 2 tygodnie",
     ],
     highlight: false,
     badge: null,
   },
   {
-    name: "Professional",
-    subtitle: "Most popular choice",
-    price: { monthly: 99, yearly: 990 },
-    description: "Advanced AI capabilities for growing teams",
-    icon: Crown,
+    name: "Profesjonalny",
+    subtitle: "Najpopularniejszy wybór",
+    price: 599,
+    description: "Kompleksowa transformacja z pełnym wsparciem",
+
     gradient: "from-indigo-600/20 to-purple-600/20",
     borderGradient: "from-indigo-400 to-purple-400",
     features: [
-      "Unlimited AI projects",
-      "Premium AI models",
-      "Priority support",
-      "Custom templates",
-      "100GB cloud storage",
-      "Advanced analytics",
-      "Team collaboration",
-      "API access",
+      "8 treningów miesięcznie",
+      "Spersonalizowany plan treningowy",
+      "Pełny plan dietetyczny",
+      "Wsparcie 24/7 przez WhatsApp",
+      "Analiza składu ciała InBody",
+      "Treningi grupowe GRATIS",
+      "Dostęp do strefy cardio",
+      "Suplementacja na miarę",
     ],
     highlight: true,
-    badge: "Most Popular",
+    badge: "Bestseller",
   },
   {
-    name: "Enterprise",
-    subtitle: "For large organizations",
-    price: { monthly: 299, yearly: 2990 },
-    description: "Enterprise-grade AI solutions with full control",
-    icon: Rocket,
+    name: "VIP",
+    subtitle: "Maksymalne rezultaty",
+    price: 999,
+    description: "Ekskluzywny program dla wymagających klientów",
+
     gradient: "from-indigo-500/20 to-purple-500/20",
     borderGradient: "from-rose-400 to-pink-400",
     features: [
-      "Everything in Professional",
-      "Custom AI model training",
-      "24/7 dedicated support",
-      "Unlimited cloud storage",
-      "Advanced security",
-      "Custom integrations",
-      "SLA guarantee",
-      "White-label options",
+      "Nieograniczone treningi",
+      "Plan treningowy + domowy",
+      "Dieta z przepisami",
+      "Priorytetowe terminy",
+      "Masaże regeneracyjne",
+      "Sesja zdjęciowa przed/po",
+      "Dostęp do sauny",
+      "Gwarancja rezultatów",
     ],
     highlight: false,
+    badge: null,
   },
 ];
 
-const additionalFeatures = [
-  {
-    icon: Brain,
-    title: "Advanced AI Models",
-    description: "Access to GPT-4, Claude, and custom models",
-  },
-  {
-    icon: Shield,
-    title: "Enterprise Security",
-    description: "SOC 2 compliant with end-to-end encryption",
-  },
-  {
-    icon: Globe,
-    title: "Global Infrastructure",
-    description: "99.9% uptime with worldwide data centers",
-  },
-  {
-    icon: Users,
-    title: "Team Collaboration",
-    description: "Real-time collaboration with unlimited teammates",
-  },
-];
-
-export function PremiumPricing({
-  customTiers,
-  customFeatures,
-  onPlanSelect,
-  ctaText = "Get Started",
-  showAdditionalFeatures = true,
-  showCTASection = true,
-  yearlyDiscountPercent = 20,
-}: PremiumPricingProps = {}) {
-  const [isYearly, setIsYearly] = useState(false);
+export function PersonalTrainerPricing() {
   const [hoveredPlan, setHoveredPlan] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Memoize validation results to prevent unnecessary re-calculations
-  const validationResult = useMemo(() => {
-    let tiers = pricingPlans;
-    let features = additionalFeatures;
-    let hasError = false;
-    let errorMessage = "";
-
-    try {
-      if (customTiers) {
-        const invalidTiers = customTiers.filter(
-          (tier) => !validatePricingTier(tier)
-        );
-        if (invalidTiers.length > 0) {
-          hasError = true;
-          errorMessage =
-            "Invalid pricing tiers provided. Please check the tier configuration.";
-        } else {
-          tiers = customTiers;
-        }
-      }
-
-      if (customFeatures && !hasError) {
-        const invalidFeatures = customFeatures.filter(
-          (feature) => !validateAdditionalFeature(feature)
-        );
-        if (invalidFeatures.length > 0) {
-          hasError = true;
-          errorMessage =
-            "Invalid additional features provided. Please check the feature configuration.";
-        } else {
-          features = customFeatures;
-        }
-      }
-
-      // Validate yearlyDiscountPercent
-      if (yearlyDiscountPercent < 0 || yearlyDiscountPercent > 100) {
-        hasError = true;
-        errorMessage = `Yearly discount percent must be between 0 and 100. Received: ${yearlyDiscountPercent}`;
-      }
-    } catch (err) {
-      hasError = true;
-      errorMessage =
-        err instanceof Error ? err.message : "An unknown error occurred";
-    }
-
-    return { tiers, features, hasError, errorMessage };
-  }, [customTiers, customFeatures, yearlyDiscountPercent]);
-
-  const { tiers, features, hasError, errorMessage } = validationResult;
-
-  // Handle plan selection with error handling
   const handlePlanSelect = (planName: string) => {
-    try {
-      onPlanSelect?.(planName, isYearly);
-    } catch (err) {
-      console.error("Error in plan selection callback:", err);
-    }
+    console.log(`Selected plan: ${planName}`);
+    // Handle plan selection logic here
   };
-
-  // Calculate savings for yearly billing with validation
-  const calculateYearlySavings = (
-    monthlyPrice: number,
-    yearlyPrice: number
-  ) => {
-    if (typeof monthlyPrice !== "number" || typeof yearlyPrice !== "number") {
-      return 0;
-    }
-    return Math.max(0, monthlyPrice * 12 - yearlyPrice);
-  };
-
-  // Show error state if there's an error
-  if (hasError) {
-    return (
-      <ErrorFallback
-        error={new Error(errorMessage)}
-        resetErrorBoundary={() => window.location.reload()}
-      />
-    );
-  }
 
   // Animation variants
   const fadeInUp = {
@@ -273,8 +116,6 @@ export function PremiumPricing({
     <section className="relative py-32 bg-gradient-to-b from-zinc-950 via-indigo-950/20 to-zinc-950 text-white overflow-hidden">
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0">
-        {/* Animated gradient mesh */}
-
         {/* Moving orbs */}
         <motion.div
           className="absolute top-1/4 left-1/6 w-80 h-80 bg-indigo-400/10 rounded-full blur-3xl"
@@ -342,7 +183,7 @@ export function PremiumPricing({
             variants={fadeInUp}
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-              Przyjdź na trening
+              Wybierz swój plan
             </span>
             <br />
             <motion.span
@@ -359,7 +200,7 @@ export function PremiumPricing({
                 backgroundSize: "200% 200%",
               }}
             >
-              Zmień się na lepsze
+              Treningu Personalnego
             </motion.span>
           </motion.h2>
 
@@ -367,79 +208,17 @@ export function PremiumPricing({
             className="text-xl sm:text-2xl text-white/60 max-w-4xl mx-auto leading-relaxed mb-12"
             variants={fadeInUp}
           >
-            Odblokuj swój potencjał z moją pomocą, abyś mógł w końcu cieszyć się
-            życiem
+            Odkryj swoją najlepszą formę z profesjonalnym wsparciem. Każdy plan
+            dostosowany do Twoich celów i możliwości.
           </motion.p>
+        </motion.div>
 
-          {/* Billing Toggle */}
-          <motion.div
-            className="flex items-center justify-center gap-4"
-            variants={fadeInUp}
-          >
-            <span
-              className={`text-sm font-medium ${
-                !isYearly ? "text-white" : "text-white/60"
-              }`}
-            >
-              Monthly
-            </span>{" "}
-            <motion.button
-              onClick={() => setIsYearly(!isYearly)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setIsYearly(!isYearly);
-                }
-              }}
-              className={`relative w-16 h-8 rounded-full border-2 transition-all ${
-                isYearly
-                  ? "bg-indigo-500 border-indigo-400"
-                  : "bg-white/[0.08] border-white/[0.15]"
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label={`Switch to ${
-                isYearly ? "monthly" : "yearly"
-              } billing`}
-              aria-pressed={isYearly}
-              role="switch"
-            >
-              <motion.div
-                className="absolute top-0.5 w-6 h-6 bg-white rounded-full shadow-lg"
-                animate={{
-                  x: isYearly ? 32 : 2,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 500,
-                  damping: 30,
-                }}
-              />
-            </motion.button>
-            <span
-              className={`text-sm font-medium ${
-                isYearly ? "text-white" : "text-white/60"
-              }`}
-            >
-              Yearly
-            </span>{" "}
-            {isYearly && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="px-2 py-1 bg-green-500/20 border border-green-400/30 rounded-full text-xs text-green-300"
-              >
-                Save {yearlyDiscountPercent}%
-              </motion.div>
-            )}
-          </motion.div>
-        </motion.div>{" "}
         {/* Pricing Cards */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
           variants={staggerContainer}
         >
-          {tiers.map((plan, index) => (
+          {pricingPlans.map((plan, index) => (
             <motion.div
               key={plan.name}
               className="relative"
@@ -448,7 +227,7 @@ export function PremiumPricing({
               onHoverEnd={() => setHoveredPlan(null)}
             >
               <motion.div
-                className={`relative h-full p-8 rounded-3xl border backdrop-blur-xl overflow-hidden ${
+                className={`relative h-full p-8 rounded-3xl border backdrop-blur-xl overflow-hidden flex flex-col ${
                   plan.highlight
                     ? "bg-gradient-to-br from-white/[0.12] to-white/[0.04] border-indigo-400/50"
                     : "bg-gradient-to-br from-white/[0.08] to-white/[0.02] border-white/[0.15]"
@@ -490,49 +269,29 @@ export function PremiumPricing({
                   }}
                 />
 
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <motion.div
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${plan.gradient} border border-white/20 flex items-center justify-center mb-6`}
-                    whileHover={{ scale: 1.1, rotateY: 180 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <plan.icon className="w-8 h-8 text-white" />
-                  </motion.div>
+                <div className="relative z-10 flex flex-col h-full">
                   {/* Plan Info */}
                   <h3 className="text-2xl font-bold text-white mb-2">
                     {plan.name}
                   </h3>
                   <p className="text-white/60 text-sm mb-4">{plan.subtitle}</p>
                   <p className="text-white/80 mb-6">{plan.description}</p>
+
                   {/* Price */}
                   <div className="mb-8">
                     <div className="flex items-baseline gap-2">
                       <span className="text-4xl font-bold text-white">
-                        ${isYearly ? plan.price.yearly : plan.price.monthly}
+                        {plan.price} zł
                       </span>
-                      <span className="text-white/60">
-                        /{isYearly ? "year" : "month"}
-                      </span>
+                      <span className="text-white/60">/miesiąc</span>
                     </div>
-                    {isYearly && (
-                      <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-green-400 text-sm mt-1"
-                      >
-                        Save $
-                        {calculateYearlySavings(
-                          plan.price.monthly,
-                          plan.price.yearly
-                        )}{" "}
-                        per year
-                      </motion.p>
-                    )}
-                  </div>{" "}
-                  {/* Features */}
-                  <div className="mb-8">
-                    <span className="sr-only">{plan.name} plan features:</span>
+                  </div>
+
+                  {/* Features - flex-grow to push button to bottom */}
+                  <div className="mb-8 flex-grow">
+                    <span className="sr-only">
+                      Zawartość planu {plan.name}:
+                    </span>
                     {plan.features.map((feature, featureIndex) => (
                       <motion.div
                         key={featureIndex}
@@ -550,23 +309,22 @@ export function PremiumPricing({
                         <span className="text-white/80 text-sm">{feature}</span>
                       </motion.div>
                     ))}
-                  </div>{" "}
-                  {/* CTA Button */}
+                  </div>
+
+                  {/* CTA Button - always at bottom */}
                   <motion.button
                     onClick={() => handlePlanSelect(plan.name)}
-                    className={`w-full py-4 px-6 rounded-full font-medium transition-all ${
+                    className={`w-full py-4 px-6 rounded-full font-medium transition-all mt-auto ${
                       plan.highlight
                         ? "bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white"
                         : "bg-white/[0.08] border border-white/[0.15] text-white hover:bg-white/[0.12] hover:border-white/[0.25]"
                     }`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    aria-label={`Select ${plan.name} plan - ${
-                      isYearly ? plan.price.yearly : plan.price.monthly
-                    } dollars per ${isYearly ? "year" : "month"}`}
+                    aria-label={`Wybierz plan ${plan.name} - ${plan.price} złotych miesięcznie`}
                   >
                     <span className="flex items-center justify-center gap-2">
-                      {ctaText}
+                      Zacznij teraz
                       <ArrowRight className="w-4 h-4" />
                     </span>
                   </motion.button>
@@ -576,12 +334,13 @@ export function PremiumPricing({
                 <AnimatePresence>
                   {hoveredPlan === index && (
                     <motion.div
-                      className="absolute inset-0 rounded-3xl"
+                      className="absolute inset-0 rounded-3xl pointer-events-none"
                       style={{
-                        background: `linear-gradient(135deg, ${plan.borderGradient
-                          .replace("from-", "rgba(")
-                          .replace(" to-", ", 0.2) 0%, rgba(")
-                          .replace("-", ", ")}, 0.1) 100%)`,
+                        background: `radial-gradient(circle at center, ${
+                          plan.highlight
+                            ? "rgba(99, 102, 241, 0.15)"
+                            : "rgba(255, 255, 255, 0.05)"
+                        }, transparent)`,
                         filter: "blur(20px)",
                       }}
                       initial={{ opacity: 0 }}
@@ -594,138 +353,8 @@ export function PremiumPricing({
               </motion.div>
             </motion.div>
           ))}
-        </motion.div>{" "}
-        {/* Additional Features */}
-        {showAdditionalFeatures && (
-          <motion.div className="mb-20" variants={fadeInUp}>
-            <h3 className="text-3xl font-bold text-center text-white mb-12">
-              What Makes Our Platform Special
-            </h3>{" "}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {features.map((feature, index) => (
-                <motion.div
-                  key={index}
-                  className="p-6 bg-white/[0.05] backdrop-blur-xl rounded-2xl border border-white/[0.15] text-center group hover:bg-white/[0.08] transition-all"
-                  variants={fadeInUp}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                >
-                  <motion.div
-                    className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-white/20 flex items-center justify-center mx-auto mb-4"
-                    whileHover={{ rotateY: 180 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <feature.icon className="w-6 h-6 text-indigo-300" />
-                  </motion.div>
-                  <h4 className="text-lg font-semibold text-white mb-2">
-                    {feature.title}
-                  </h4>
-                  <p className="text-white/60 text-sm">{feature.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}{" "}
-        {/* CTA Section */}
-        {showCTASection && (
-          <motion.div className="text-center" variants={fadeInUp}>
-            <div className="relative bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl rounded-3xl border border-white/[0.15] p-8 md:p-12 overflow-hidden group max-w-4xl mx-auto">
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.08] via-purple-500/[0.05] to-rose-500/[0.08] rounded-3xl"
-                animate={{
-                  backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
-                }}
-                transition={{
-                  duration: 15,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-                style={{
-                  backgroundSize: "300% 300%",
-                }}
-              />
-
-              <div className="relative z-10">
-                <h3 className="text-3xl md:text-4xl font-bold mb-6">
-                  <span className="bg-gradient-to-r from-white via-indigo-200 to-rose-200 bg-clip-text text-transparent">
-                    Gotowy zmienić się na lepsze?
-                  </span>
-                </h3>
-                <p className="text-xl text-white/70 mb-8 leading-relaxed">
-                  Dołącz do elitarnego grona moich klientów, aby zmienić swoje
-                  życie.
-                </p>
-
-                <motion.button
-                  className="relative group overflow-hidden bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-medium py-4 px-8 rounded-full transition-all"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="relative z-10 flex items-center gap-3">
-                    <Star className="h-5 w-5" />
-                    Start Free Trial
-                    <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "100%" }}
-                    transition={{ duration: 0.5 }}
-                  />
-                </motion.button>
-              </div>
-            </div>
-          </motion.div>
-        )}
+        </motion.div>
       </motion.div>
     </section>
   );
 }
-
-// Prop validation helpers
-const validatePricingTier = (tier: PricingTier): boolean => {
-  return (
-    typeof tier.name === "string" &&
-    typeof tier.subtitle === "string" &&
-    typeof tier.price === "object" &&
-    typeof tier.price.monthly === "number" &&
-    typeof tier.price.yearly === "number" &&
-    tier.price.monthly > 0 &&
-    tier.price.yearly > 0 &&
-    typeof tier.description === "string" &&
-    Array.isArray(tier.features) &&
-    tier.features.length > 0
-  );
-};
-
-const validateAdditionalFeature = (feature: AdditionalFeature): boolean => {
-  return (
-    typeof feature.title === "string" &&
-    typeof feature.description === "string" &&
-    typeof feature.icon === "function"
-  );
-};
-
-// Error boundary component
-const ErrorFallback = ({
-  error,
-  resetErrorBoundary,
-}: {
-  error: Error;
-  resetErrorBoundary: () => void;
-}) => (
-  <div className="flex flex-col items-center justify-center p-8 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
-    <AlertCircle className="h-8 w-8 text-red-500 mb-4" />
-    <h3 className="text-lg font-semibold text-red-700 dark:text-red-300 mb-2">
-      Something went wrong
-    </h3>
-    <p className="text-red-600 dark:text-red-400 text-center mb-4">
-      {error.message}
-    </p>
-    <button
-      onClick={resetErrorBoundary}
-      className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
-    >
-      Try again
-    </button>
-  </div>
-);

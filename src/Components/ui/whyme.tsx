@@ -236,7 +236,7 @@ const WhyMeSection: React.FC = () => {
           >
             <div className="relative rounded-2xl overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=800&fit=crop"
+                src="/image0.jpeg"
                 alt="Personal Trainer"
                 className="w-full h-[500px] object-cover"
               />
@@ -272,29 +272,6 @@ const WhyMeSection: React.FC = () => {
               />
             ))}
           </div>
-        </motion.div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="text-center mt-16"
-        >
-          <h3 className="text-3xl font-bold text-white mb-6">
-            Ready to Transform Your Life?
-          </h3>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join hundreds of satisfied clients who've achieved their fitness
-            goals. Let's create your personalized transformation plan today.
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors duration-300"
-          >
-            Start Your Journey Today
-          </motion.button>
         </motion.div>
       </div>
     </section>

@@ -86,11 +86,21 @@ export function ParallaxComponent() {
               data-parallax-layer="3"
               className="absolute inset-0 flex items-center justify-center"
             >
-              <h2 className="text-7xl md:text-9xl font-bold text-white">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">
-                  Marcel Kaczmarski
-                </span>
-              </h2>
+              <div className="relative">
+                {/* Badge */}
+                <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
+                  <div className="bg-purple-800 text-white px-6 py-2 rounded-full text-sm font-medium">
+                    Trener personalny
+                  </div>
+                </div>
+
+                {/* Name */}
+                <h2 className="text-7xl md:text-9xl font-bold text-white">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">
+                    Marcel Kaczmarski
+                  </span>
+                </h2>
+              </div>
             </div>
 
             {/* Foreground layer */}

@@ -235,31 +235,6 @@ export function PremiumContact() {
         </motion.div>
 
         {/* Stats Bar */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20"
-          variants={fadeInUp}
-        >
-          {companyStats.map((stat, index) => (
-            <motion.div
-              key={index}
-              className="text-center p-6 bg-white/[0.05] backdrop-blur-xl rounded-2xl border border-white/[0.15] group hover:bg-white/[0.08] transition-all"
-              whileHover={{ scale: 1.05, y: -5 }}
-              variants={fadeInUp}
-            >
-              <motion.div
-                className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-white/20 flex items-center justify-center mx-auto mb-3"
-                whileHover={{ rotateY: 180 }}
-                transition={{ duration: 0.6 }}
-              >
-                <stat.icon className="w-6 h-6 text-indigo-300" />
-              </motion.div>
-              <div className="text-2xl font-bold text-white mb-1">
-                {stat.value}
-              </div>
-              <div className="text-white/60 text-sm">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
@@ -494,22 +469,6 @@ export function PremiumContact() {
                 </motion.a>
               ))}
             </div>
-
-            {/* Additional Info */}
-            <motion.div
-              className="p-6 bg-gradient-to-br from-indigo-500/[0.08] to-purple-500/[0.08] backdrop-blur-xl rounded-2xl border border-indigo-400/30"
-              variants={fadeInUp}
-            >
-              <h4 className="text-lg font-semibold text-white mb-3">
-                Quick Response Guarantee
-              </h4>
-              <p className="text-white/80 text-sm leading-relaxed">
-                We pride ourselves on rapid response times. All inquiries are
-                typically answered within 2 hours during business hours, and
-                we'll schedule a call within 24 hours to discuss your project in
-                detail.
-              </p>
-            </motion.div>
           </motion.div>
         </div>
 

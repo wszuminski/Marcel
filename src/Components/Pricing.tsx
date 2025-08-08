@@ -1,7 +1,7 @@
-import { PremiumPricing } from "./ui/pricing";
+import { PersonalTrainerPricing } from "./ui/pricing";
 
 const Pricing = () => {
-  return <PremiumPricing />;
+  return <PersonalTrainerPricing />;
 };
 
 export { Pricing };

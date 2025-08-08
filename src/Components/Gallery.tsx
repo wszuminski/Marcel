@@ -9,43 +9,27 @@ export function GallerySection() {
   const images = [
     {
       src: "/image0 (1).jpeg",
-      alt: "Trening personalny",
-      category: "Personal Training",
     },
     {
       src: "/image0.jpeg",
-      alt: "Siłownia",
-      category: "Gym Equipment",
     },
     {
       src: "/image1 (1).jpeg",
-      alt: "Transformacja klienta",
-      category: "Client Transformation",
     },
     {
       src: "/image1.jpeg",
-      alt: "Trening grupowy",
-      category: "Group Training",
     },
     {
       src: "/image2 (1).jpeg",
-      alt: "Przygotowanie do zawodów",
-      category: "Competition Prep",
     },
     {
       src: "/image2.jpeg",
-      alt: "Trening funkcjonalny",
-      category: "Functional Training",
     },
     {
       src: "/image3.jpeg",
-      alt: "Konsultacja żywieniowa",
-      category: "Nutrition Consultation",
     },
     {
       src: "/image4.jpeg",
-      alt: "Rezultaty",
-      category: "Results",
     },
   ];
 
@@ -93,9 +77,9 @@ export function GallerySection() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
-              Galeria{" "}
+              Moja{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-                Transformacji
+                Galeria
               </span>
             </h2>
             <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
@@ -151,12 +135,12 @@ export function GallerySection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4"
             onClick={closeLightbox}
           >
             {/* Close Button */}
             <button
-              className="absolute top-4 right-4 p-2 rounded-full bg-zinc-800/80 text-white hover:bg-zinc-700 transition-colors"
+              className="absolute top-4 right-4 p-2 rounded-full bg-zinc-800/80 text-white hover:bg-zinc-700 transition-colors z-10"
               onClick={closeLightbox}
             >
               <X size={24} />
@@ -164,7 +148,7 @@ export function GallerySection() {
 
             {/* Navigation Buttons */}
             <button
-              className="absolute left-4 p-2 rounded-full bg-zinc-800/80 text-white hover:bg-zinc-700 transition-colors"
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-zinc-800/80 text-white hover:bg-zinc-700 transition-colors z-10"
               onClick={(e) => {
                 e.stopPropagation();
                 goToPrevious();
@@ -174,7 +158,7 @@ export function GallerySection() {
             </button>
 
             <button
-              className="absolute right-4 p-2 rounded-full bg-zinc-800/80 text-white hover:bg-zinc-700 transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-zinc-800/80 text-white hover:bg-zinc-700 transition-colors z-10"
               onClick={(e) => {
                 e.stopPropagation();
                 goToNext();
@@ -183,32 +167,42 @@ export function GallerySection() {
               <ChevronRight size={24} />
             </button>
 
-            {/* Image Container */}
+            {/* Image Container - Fixed to prevent overflow */}
             <motion.div
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
               transition={{ duration: 0.2 }}
-              className="relative max-w-6xl max-h-[90vh] mx-4"
+              className="relative w-full h-full max-w-[90vw] max-h-[85vh] flex items-center justify-center"
               onClick={(e) => e.stopPropagation()}
             >
-              <img
-                src={selectedImage.src}
-                alt={selectedImage.alt}
-                className="w-full h-full object-contain rounded-lg"
-              />
+              <div className="relative w-full h-full flex items-center justify-center">
+                <img
+                  src={selectedImage.src}
+                  alt={selectedImage.alt}
+                  className="max-w-full max-h-full w-auto h-auto object-contain rounded-lg"
+                />
 
-              {/* Image Info */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
-                <h3 className="text-white text-2xl font-semibold mb-1">
-                  {selectedImage.alt}
-                </h3>
-                <p className="text-purple-300">{selectedImage.category}</p>
+                {/* Image Info - Positioned at bottom of image container */}
+                {(selectedImage.alt || selectedImage.category) && (
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg max-w-full">
+                    {selectedImage.alt && (
+                      <h3 className="text-white text-2xl font-semibold mb-1">
+                        {selectedImage.alt}
+                      </h3>
+                    )}
+                    {selectedImage.category && (
+                      <p className="text-purple-300">
+                        {selectedImage.category}
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
             </motion.div>
 
             {/* Image Counter */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-zinc-800/80 px-4 py-2 rounded-full">
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-zinc-800/80 px-4 py-2 rounded-full z-10">
               <p className="text-white text-sm">
                 {selectedIndex + 1} / {images.length}
               </p>
