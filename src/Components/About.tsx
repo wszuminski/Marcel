@@ -1,7 +1,7 @@
 import { Dumbbell, Trophy, Heart, Users, Target, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 
-export default function About() {
+export function About() {
   const cards = [
     {
       icon: Trophy,
