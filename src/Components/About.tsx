@@ -1,7 +1,7 @@
 import { Dumbbell, Trophy, Heart, Users, Target, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 
-export function About() {
+export default function About() {
   const cards = [
     {
       icon: Trophy,
@@ -88,7 +88,80 @@ export function About() {
           </p>
         </motion.div>
 
-        {/* Cards Grid */}
+        {/* Hero Image Section */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mb-20 relative"
+        >
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            {/* Left - Trainer Image */}
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl blur-2xl opacity-30 group-hover:opacity-40 transition-opacity"></div>
+              <img
+                src="/image3.jpeg"
+                alt="Personal Trainer"
+                className="relative rounded-3xl w-full h-[500px] object-cover shadow-2xl"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8 rounded-b-3xl">
+                <h3 className="text-3xl font-bold text-white mb-2">
+                  Marcel Kaczmarski
+                </h3>
+                <p className="text-purple-400 font-medium">
+                  Master Trainer & Nutrition Coach
+                </p>
+              </div>
+            </div>
+
+            {/* Right - Personal Message */}
+            <div className="space-y-6">
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <h3 className="text-3xl font-bold text-white mb-4">
+                  Cześć! Jestem Marcel
+                </h3>
+                <p className="text-gray-300 leading-relaxed mb-4">
+                  Fitness to moja pasja, którą dzielę się z innymi od ponad 10
+                  lat. Wierzę, że każdy zasługuje na to, by czuć się silny,
+                  zdrowy i pewny siebie.
+                </p>
+                <p className="text-gray-300 leading-relaxed mb-4">
+                  Moje podejście łączy naukową wiedzę z praktycznym
+                  doświadczeniem. Nie stosuję uniwersalnych rozwiązań - każdy
+                  plan jest tak unikalny jak Ty.
+                </p>
+                <p className="text-gray-300 leading-relaxed">
+                  Razem stworzymy program, który nie tylko zmieni Twoje ciało,
+                  ale też sposób myślenia o zdrowiu i fitness.
+                </p>
+              </motion.div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-4">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-purple-400">500+</div>
+                  <div className="text-sm text-gray-400">Klientów</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-purple-400">10+</div>
+                  <div className="text-sm text-gray-400">Lat</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-purple-400">98%</div>
+                  <div className="text-sm text-gray-400">Sukcesu</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Cards Grid with Images */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cards.map((card, index) => (
             <motion.div
@@ -135,6 +208,75 @@ export function About() {
             </motion.div>
           ))}
         </div>
+
+        {/* Action Images Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mt-20"
+        >
+          <h3 className="text-3xl font-bold text-white text-center mb-12">
+            W Akcji
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Training Session */}
+            <div className="relative group overflow-hidden rounded-2xl">
+              <img
+                src="/image0.jpeg"
+                alt="Training session"
+                className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-6">
+                <div>
+                  <h4 className="text-white font-semibold text-lg">
+                    Trening Personalny
+                  </h4>
+                  <p className="text-gray-300 text-sm">
+                    Indywidualne sesje treningowe
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Nutrition Coaching */}
+            <div className="relative group overflow-hidden rounded-2xl">
+              <img
+                src="/image2 (1).jpeg"
+                alt="Gym coaching"
+                className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110 object-[center_30%]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-6">
+                <div>
+                  <h4 className="text-white font-semibold text-lg">
+                    Coaching Grupowy
+                  </h4>
+                  <p className="text-gray-300 text-sm">Motywacja w grupie</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Results */}
+            <div className="relative group overflow-hidden rounded-2xl">
+              <img
+                src="/image1 (1).jpeg"
+                alt="Fitness results"
+                className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-6">
+                <div>
+                  <h4 className="text-white font-semibold text-lg">
+                    Wymierne Rezultaty
+                  </h4>
+                  <p className="text-gray-300 text-sm">
+                    Transformacje, które inspirują
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

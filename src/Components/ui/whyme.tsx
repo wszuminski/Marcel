@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  Dumbbell,
-  Trophy,
+  Activity,
   Users,
-  Clock,
-  CheckCircle,
+  Calendar,
+  Shield,
   Target,
   Heart,
-  Zap,
+  Sparkles,
+  TrendingUp,
+  Brain,
+  Apple,
+  FlameKindling,
+  Medal,
+  UserCheck,
 } from "lucide-react";
 
 interface Stat {
@@ -24,36 +29,36 @@ interface Achievement {
 }
 
 const stats: Stat[] = [
-  { number: "500+", label: "Clients Transformed", icon: Users },
-  { number: "5+", label: "Years Experience", icon: Clock },
-  { number: "98%", label: "Success Rate", icon: Trophy },
-  { number: "24/7", label: "Support Available", icon: Heart },
+  { number: "500+", label: "Zmienionych Życii", icon: Users },
+  { number: "5+", label: "Lat Doświadczenia", icon: Calendar },
+  { number: "98%", label: "Skuteczność", icon: TrendingUp },
+  { number: "24/7", label: "Wsparcie Online", icon: Heart },
 ];
 
 const achievements: Achievement[] = [
   {
-    title: "Certified Personal Trainer",
+    title: "Certyfikowany Trener Personalny",
     description:
-      "NASM-CPT certified with advanced specializations in strength training and nutrition",
-    icon: Trophy,
+      "Certyfikat NASM-CPT z zaawansowanymi specjalizacjami w treningu siłowym i żywieniu",
+    icon: Medal,
   },
   {
-    title: "Nutrition Specialist",
+    title: "Specjalista ds. Żywienia",
     description:
-      "Precision Nutrition Level 1 certified to optimize your meal plans and dietary habits",
-    icon: Target,
+      "Certyfikat Precision Nutrition Level 1 do optymalizacji planów żywieniowych",
+    icon: Apple,
   },
   {
-    title: "Injury Prevention Expert",
+    title: "Ekspert Prewencji Urazów",
     description:
-      "Corrective Exercise Specialist helping you train safely and recover faster",
-    icon: CheckCircle,
+      "Specjalista ćwiczeń korekcyjnych pomagający trenować bezpiecznie i szybciej się regenerować",
+    icon: Shield,
   },
   {
-    title: "Mindset Coach",
+    title: "Coach Mentalny",
     description:
-      "Mental performance coaching to build lasting habits and overcome plateaus",
-    icon: Zap,
+      "Coaching mentalny do budowania trwałych nawyków i przełamywania barier",
+    icon: Brain,
   },
 ];
 
@@ -143,12 +148,12 @@ const WhyMeSection: React.FC = () => {
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Why Choose <span className="text-purple-400">Me?</span>
+            Dlaczego <span className="text-purple-400">Ja?</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            With proven results, personalized approach, and unwavering
-            commitment to your success, I'm here to transform not just your
-            body, but your entire relationship with fitness.
+            Ze sprawdzonymi rezultatami, spersonalizowanym podejściem i
+            niezachwianym zaangażowaniem w Twój sukces, jestem tu, aby zmienić
+            nie tylko Twoje ciało, ale całe podejście do fitnessu.
           </p>
         </motion.div>
 
@@ -168,59 +173,59 @@ const WhyMeSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <h3 className="text-3xl font-bold text-white mb-8 flex items-center">
-              <Dumbbell className="w-8 h-8 text-purple-400 mr-3" />
-              What Sets Me Apart
+              <Activity className="w-8 h-8 text-purple-400 mr-3" />
+              Co Mnie Wyróżnia
             </h3>
 
             <div className="space-y-6">
               <div className="flex items-start space-x-4">
-                <CheckCircle className="w-6 h-6 text-purple-400 mt-1 flex-shrink-0" />
+                <Sparkles className="w-6 h-6 text-purple-400 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-white font-semibold mb-2">
-                    Personalized Training Programs
+                    Spersonalizowane Programy Treningowe
                   </h4>
                   <p className="text-gray-300">
-                    Every workout is tailored to your specific goals, fitness
-                    level, and lifestyle constraints.
+                    Każdy trening dostosowany do Twoich celów, poziomu
+                    sprawności i ograniczeń czasowych.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <CheckCircle className="w-6 h-6 text-purple-400 mt-1 flex-shrink-0" />
+                <Target className="w-6 h-6 text-purple-400 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-white font-semibold mb-2">
-                    Holistic Approach
+                    Holistyczne Podejście
                   </h4>
                   <p className="text-gray-300">
-                    Combining strength training, nutrition coaching, and mindset
-                    work for lasting transformation.
+                    Łączenie treningu siłowego, coachingu żywieniowego i pracy
+                    nad mentalnością dla trwałej transformacji.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <CheckCircle className="w-6 h-6 text-purple-400 mt-1 flex-shrink-0" />
+                <FlameKindling className="w-6 h-6 text-purple-400 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-white font-semibold mb-2">
-                    Flexible Scheduling
+                    Elastyczne Terminy
                   </h4>
                   <p className="text-gray-300">
-                    Online and in-person sessions that work around your busy
-                    schedule.
+                    Sesje online i stacjonarne dopasowane do Twojego napiętego
+                    harmonogramu.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <CheckCircle className="w-6 h-6 text-purple-400 mt-1 flex-shrink-0" />
+                <UserCheck className="w-6 h-6 text-purple-400 mt-1 flex-shrink-0" />
                 <div>
                   <h4 className="text-white font-semibold mb-2">
-                    Ongoing Support
+                    Ciągłe Wsparcie
                   </h4>
                   <p className="text-gray-300">
-                    24/7 access to guidance, motivation, and accountability
-                    through our app.
+                    Całodobowy dostęp do wskazówek, motywacji i wsparcia przez
+                    naszą aplikację.
                   </p>
                 </div>
               </div>
@@ -237,16 +242,16 @@ const WhyMeSection: React.FC = () => {
             <div className="relative rounded-2xl overflow-hidden">
               <img
                 src="/image0.jpeg"
-                alt="Personal Trainer"
+                alt="Trener Personalny"
                 className="w-full h-[500px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
                 <h4 className="text-white text-2xl font-bold mb-2">
-                  Alex Thompson
+                  Marcel Kaczmarski
                 </h4>
                 <p className="text-purple-400 font-semibold">
-                  Certified Personal Trainer & Nutrition Coach
+                  Certyfikowany Trener Personalny i Coach Żywieniowy
                 </p>
               </div>
             </div>
@@ -261,7 +266,7 @@ const WhyMeSection: React.FC = () => {
           className="mb-20"
         >
           <h3 className="text-3xl font-bold text-white mb-8 text-center">
-            Credentials & Expertise
+            Kwalifikacje i Ekspertyza
           </h3>
           <div className="grid md:grid-cols-2 gap-6">
             {achievements.map((achievement, index) => (
