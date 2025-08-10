@@ -95,7 +95,7 @@ export function ParallaxComponent() {
                 </div>
 
                 {/* Name */}
-                <h2 className="text-7xl md:text-9xl font-bold text-white">
+                <h2 className="text-5xl md:text-9xl font-bold text-white">
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">
                     Marcel Kaczmarski
                   </span>

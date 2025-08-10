@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 import ParallaxDemo from "./ParallaxHero";
 import { Pricing } from "./Pricing";
 import { Testimonials } from "./Testimonials";
-// import { MetamorphosisSection } from "./Transformations";
+import { MetamorphosisSection } from "./Transformations";
 import WhyMeSectionDemo from "./ui/whyme";
 import { VSLSection } from "./VideoSection";
 
@@ -22,7 +22,7 @@ export function Hero() {
       <WhyMeSectionDemo />
       <GallerySection />
       <VSLSection />
-      {/* <MetamorphosisSection /> */}
+      <MetamorphosisSection />
       <Pricing />
       <Testimonials />
       <Contact />
