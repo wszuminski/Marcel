@@ -18,10 +18,11 @@ export function Hero() {
       </div>
 
       <ParallaxDemo />
+      <VSLSection />
+
       <About />
       <WhyMeSectionDemo />
       <GallerySection />
-      <VSLSection />
       <MetamorphosisSection />
       <Pricing />
       <Testimonials />

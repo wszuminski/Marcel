@@ -1,433 +1,198 @@
-//@ts-nocheck
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
-import { Quote, Star, ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
+import {
+  animate,
+  cubicBezier,
+  motion,
+  useMotionValue,
+  wrap,
+} from "motion/react";
+import {
+  memo,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  createContext,
+} from "react";
+import { cva } from "class-variance-authority";
+import { cn } from "../../lib/utils";
 
-const testimonials = [
-  {
-    name: "Sarah Chen",
-    role: "CEO, TechFlow Solutions",
-    company: "TechFlow",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
-    rating: 5,
-    text: "Lord transformed our entire operation. We've seen a 300% increase in efficiency and saved over $2M in operational costs. The autonomous agents work flawlessly.",
-    results: [
-      "300% efficiency increase",
-      "$2M cost savings",
-      "24/7 automation",
-    ],
-  },
-  {
-    name: "Marcus Johnson",
-    role: "CTO, DataDrive Inc",
-    company: "DataDrive",
-    avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-    rating: 5,
-    text: "The voice agents are revolutionary. Our customer satisfaction increased by 40% while reducing response time from hours to seconds. Incredible ROI.",
-    results: [
-      "40% satisfaction boost",
-      "Instant responses",
-      "Seamless integration",
-    ],
-  },
-  {
-    name: "Elena Rodriguez",
-    role: "VP Operations, ScaleUp Co",
-    company: "ScaleUp",
-    avatar:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
-    rating: 5,
-    text: "From workflow automation to social media management, Lord handles everything. Our team can finally focus on strategy instead of repetitive tasks.",
-    results: ["Full automation", "Strategic focus", "Team productivity"],
-  },
-  {
-    name: "David Kim",
-    role: "Founder, GrowthLab",
-    company: "GrowthLab",
-    avatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-    rating: 5,
-    text: "The custom systems delivered results beyond our expectations. Revenue increased 150% while operational overhead decreased significantly.",
-    results: ["150% revenue growth", "Reduced overhead", "Scalable systems"],
-  },
-  {
-    name: "Lisa Thompson",
-    role: "Director, InnovateCorp",
-    company: "InnovateCorp",
-    avatar:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face",
-    rating: 5,
-    text: "Exceptional solutions that actually work. The implementation was smooth, and the results were immediate. Best investment we've made.",
-    results: ["Immediate results", "Smooth integration", "High ROI"],
-  },
-];
+//Types
+type variants = "default" | "masonry" | "polaroid";
 
-export function PremiumTestimonials() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+// Create Context
+const GridVariantContext = createContext<variants | undefined>(undefined);
+
+//Motion Variants
+const rowVariants = {
+  initial: { opacity: 0, scale: 0.3 },
+  animate: () => ({
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delay: Math.random() + 1.5,
+      duration: 1.4,
+      ease: cubicBezier(0.18, 0.71, 0.11, 1),
+    },
+  }),
+};
+
+export const DraggableContainer = ({
+  className,
+  children,
+  variant,
+}: {
+  className?: string;
+  children: React.ReactNode;
+  variant?: variants;
+}) => {
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const [isDragging, setIsDragging] = useState(false);
+  const handleIsDragging = () => setIsDragging(true);
+  const handleIsNotDragging = () => setIsDragging(false);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setDirection(1);
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
+    const container = ref.current?.getBoundingClientRect();
+    if (!container) return;
 
-    return () => clearInterval(timer);
-  }, []);
+    const { width, height } = container;
 
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
-      scale: 0.8,
-      rotateY: direction > 0 ? 45 : -45,
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-      scale: 1,
-      rotateY: 0,
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0,
-      scale: 0.8,
-      rotateY: direction < 0 ? 45 : -45,
-    }),
-  };
+    const xDrag = x.on("change", (latest) => {
+      const wrappedX = wrap(-(width / 2), 0, latest);
+      x.set(wrappedX);
+    });
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 60 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.23, 0.86, 0.39, 0.96],
-      },
-    },
-  };
+    const yDrag = y.on("change", (latest) => {
+      const wrappedY = wrap(-(height / 2), 0, latest);
+      y.set(wrappedY);
+    });
 
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
-    },
-  };
+    const handleWheelScroll = (event: WheelEvent) => {
+      if (!isDragging) {
+        animate(y, y.get() - event.deltaY * 2.7, {
+          type: "tween",
+          duration: 1.2,
+          ease: cubicBezier(0.18, 0.71, 0.11, 1),
+        });
+      }
+    };
 
-  const nextTestimonial = () => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setDirection(-1);
-    setCurrentIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
-    );
-  };
+    window.addEventListener("wheel", handleWheelScroll);
+    return () => {
+      xDrag();
+      yDrag();
+      window.removeEventListener("wheel", handleWheelScroll);
+    };
+  }, [x, y, isDragging]);
 
   return (
-    <section
-      id="testimonials"
-      className="relative py-32 bg-gradient-to-b from-zinc-950 via-indigo-950/20 to-black text-white overflow-hidden"
-    >
-      {/* Enhanced Background Effects */}
-      <div className="absolute inset-0">
-        {/* Moving light orbs */}
-        <motion.div
-          className="absolute top-1/3 left-1/5 w-72 h-72 bg-indigo-400/15 rounded-full blur-3xl"
-          animate={{
-            x: [0, 150, 0],
-            y: [0, 80, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/3 right-1/5 w-80 h-80 bg-rose-400/15 rounded-full blur-3xl"
-          animate={{
-            x: [0, -100, 0],
-            y: [0, -60, 0],
-            scale: [1, 1.3, 1],
-          }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-
-        {/* Floating particles */}
-        {[...Array(12)].map((_, i) => (
+    <GridVariantContext.Provider value={variant}>
+      <div className="h-dvh overflow-hidden">
+        <motion.div className="h-dvh overflow-hidden">
           <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white/30 rounded-full"
-            style={{
-              left: `${15 + i * 7}%`,
-              top: `${25 + i * 5}%`,
+            className={cn(
+              "grid h-fit w-fit cursor-grab grid-cols-[repeat(2,1fr)] bg-zinc-950 active:cursor-grabbing will-change-transform",
+              className
+            )}
+            drag
+            dragMomentum={true}
+            dragTransition={{
+              timeConstant: 200,
+              power: 0.28,
+              restDelta: 0,
+              bounceStiffness: 0,
             }}
-            animate={{
-              y: [0, -50, 0],
-              opacity: [0.2, 1, 0.2],
-              scale: [1, 2, 1],
-            }}
-            transition={{
-              duration: 3 + i * 0.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.3,
-            }}
-          />
-        ))}
-      </div>
-
-      <motion.div
-        ref={containerRef}
-        className="relative z-10 max-w-6xl mx-auto px-6"
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        {/* Header */}
-        <motion.div className="text-center mb-20" variants={fadeInUp}>
-          <motion.h2
-            className="text-4xl sm:text-6xl md:text-7xl font-bold mb-8 tracking-tight"
-            variants={fadeInUp}
+            onMouseDown={handleIsDragging}
+            onMouseUp={handleIsNotDragging}
+            onMouseLeave={handleIsNotDragging}
+            style={{ x, y }}
+            ref={ref}
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-              Zaufali mi
-            </span>
-            <br />
-            <motion.span
-              className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-500 to-rose-300"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              style={{
-                backgroundSize: "200% 200%",
-              }}
-            >
-              zwykli ludzie
-            </motion.span>
-          </motion.h2>
-
-          <motion.p
-            className="text-xl sm:text-2xl text-white/60 max-w-4xl mx-auto leading-relaxed"
-            variants={fadeInUp}
-          >
-            Dołącz do grona moich klientów
-          </motion.p>
+            {children}
+          </motion.div>
         </motion.div>
-
-        {/* Main Testimonial Display */}
-        <div className="relative max-w-6xl mx-auto mb-16">
-          <div className="relative h-[500px] md:h-[400px] perspective-1000">
-            <AnimatePresence initial={false} custom={direction}>
-              <motion.div
-                key={currentIndex}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{
-                  x: { type: "spring", stiffness: 300, damping: 30 },
-                  opacity: { duration: 0.4 },
-                  scale: { duration: 0.4 },
-                  rotateY: { duration: 0.6 },
-                }}
-                className="absolute inset-0"
-              >
-                <div className="relative h-full bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl rounded-3xl border border-white/[0.15] p-8 md:p-12 overflow-hidden group">
-                  {/* Animated background gradient */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.08] via-purple-500/[0.05] to-rose-500/[0.08] rounded-3xl"
-                    animate={{
-                      backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
-                    }}
-                    transition={{
-                      duration: 15,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    style={{
-                      backgroundSize: "300% 300%",
-                    }}
-                  />
-
-                  {/* Quote icon */}
-                  <motion.div
-                    className="absolute top-8 right-8 opacity-20"
-                    animate={{ rotate: [0, 10, 0] }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                  >
-                    <Quote className="w-16 h-16 text-white" />
-                  </motion.div>
-
-                  <div className="relative z-10 h-full flex flex-col md:flex-row items-center gap-8">
-                    {/* User Info */}
-                    <div className="flex-shrink-0 text-center md:text-left">
-                      <motion.div
-                        className="relative mb-6"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div className="w-24 h-24 mx-auto md:mx-0 rounded-full overflow-hidden border-4 border-white/20 relative">
-                          <img
-                            src={testimonials[currentIndex].avatar}
-                            alt={testimonials[currentIndex].name}
-                            className="w-full h-full object-cover"
-                          />
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-br from-indigo-400/20 to-rose-400/20"
-                            animate={{ opacity: [0, 0.3, 0] }}
-                            transition={{ duration: 3, repeat: Infinity }}
-                          />
-                        </div>
-
-                        {/* Floating ring animation */}
-                        <motion.div
-                          className="absolute inset-0 border-2 border-indigo-400/30 rounded-full"
-                          animate={{
-                            scale: [1, 1.4, 1],
-                            opacity: [0.5, 0, 0.5],
-                          }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                        />
-                      </motion.div>
-
-                      <h3 className="text-2xl font-bold text-white mb-2">
-                        {testimonials[currentIndex].name}
-                      </h3>
-                      <p className="text-indigo-300 mb-1 font-medium">
-                        {testimonials[currentIndex].role}
-                      </p>
-                      <p className="text-white/60 mb-4">
-                        {testimonials[currentIndex].company}
-                      </p>
-
-                      {/* Star Rating */}
-                      <div className="flex justify-center md:justify-start gap-1 mb-6">
-                        {[...Array(testimonials[currentIndex].rating)].map(
-                          (_, i) => (
-                            <motion.div
-                              key={i}
-                              initial={{ opacity: 0, scale: 0 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: i * 0.1, duration: 0.3 }}
-                            >
-                              <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                            </motion.div>
-                          )
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1">
-                      <motion.blockquote
-                        className="text-xl md:text-2xl text-white/90 leading-relaxed mb-8 font-light italic"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3, duration: 0.8 }}
-                      >
-                        "{testimonials[currentIndex].text}"
-                      </motion.blockquote>
-
-                      {/* Results */}
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        {testimonials[currentIndex].results.map((result, i) => (
-                          <motion.div
-                            key={i}
-                            className="bg-white/[0.05] rounded-lg p-3 border border-white/[0.1] backdrop-blur-sm"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
-                            whileHover={{
-                              backgroundColor: "rgba(255, 255, 255, 0.1)",
-                            }}
-                          >
-                            <span className="text-sm text-white/70 font-medium">
-                              {result}
-                            </span>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Navigation Controls */}
-          <div className="flex justify-center items-center gap-6 mt-8">
-            <motion.button
-              onClick={prevTestimonial}
-              className="p-3 rounded-full bg-white/[0.08] border border-white/[0.15] backdrop-blur-sm text-white hover:bg-white/[0.15] transition-all"
-              whileHover={{
-                scale: 1.1,
-                backgroundColor: "rgba(255, 255, 255, 0.15)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </motion.button>
-
-            {/* Dots Indicator */}
-            <div className="flex gap-3">
-              {testimonials.map((_, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => {
-                    setDirection(index > currentIndex ? 1 : -1);
-                    setCurrentIndex(index);
-                  }}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    index === currentIndex
-                      ? "bg-indigo-400 scale-125"
-                      : "bg-white/30 hover:bg-white/50"
-                  }`}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                />
-              ))}
-            </div>
-
-            <motion.button
-              onClick={nextTestimonial}
-              className="p-3 rounded-full bg-white/[0.08] border border-white/[0.15] backdrop-blur-sm text-white hover:bg-white/[0.15] transition-all"
-              whileHover={{
-                scale: 1.1,
-                backgroundColor: "rgba(255, 255, 255, 0.15)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
-          </div>
-        </div>
-      </motion.div>
-    </section>
+      </div>
+    </GridVariantContext.Provider>
   );
-}
+};
+
+export const GridItem = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  const variant = useContext(GridVariantContext);
+
+  const gridItemStyles = cva(
+    "overflow-hidden hover:cursor-pointer w-full h-full will-change-transform",
+    {
+      variants: {
+        variant: {
+          default: "rounded-sm",
+          masonry: "even:mt-[60%] rounded-sm ",
+          polaroid:
+            "border-10 border-b-28 border-white shadow-xl even:rotate-3 odd:-rotate-2 hover:rotate-0 transition-transform ease-out duration-300 even:mt-[60%]",
+        },
+      },
+      defaultVariants: {
+        variant: "default",
+      },
+    }
+  );
+
+  return (
+    <motion.div
+      className={cn(gridItemStyles({ variant, className }))}
+      variants={rowVariants}
+      initial="initial"
+      animate="animate"
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+export const GridBody = memo(
+  ({
+    children,
+    className,
+  }: {
+    children: React.ReactNode;
+    className?: string;
+  }) => {
+    const variant = useContext(GridVariantContext);
+
+    const gridBodyStyles = cva("grid grid-cols-[repeat(6,1fr)] h-fit w-fit", {
+      variants: {
+        variant: {
+          default: "gap-14 p-7 md:gap-28 md:p-14",
+          masonry: "gap-x-14 px-7 md:gap-x-28 md:px-14",
+          polaroid: "gap-x-14 px-7 md:gap-x-28 md:px-14",
+        },
+      },
+      defaultVariants: {
+        variant: "default",
+      },
+    });
+
+    return (
+      <>
+        {Array.from({ length: 4 }).map((_, index) => (
+          <div
+            key={index}
+            className={cn(gridBodyStyles({ variant, className }))}
+          >
+            {children}
+          </div>
+        ))}
+      </>
+    );
+  }
+);
+
+GridBody.displayName = "GridBody";

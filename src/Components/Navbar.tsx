@@ -35,9 +35,10 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+        {/* Desktop Navigation - Using Grid for better centering */}
+        <div className="hidden lg:grid grid-cols-[1fr_auto_1fr] items-center h-20 max-w-4xl mx-auto">
           {/* Left Navigation */}
-          <div className="hidden lg:flex items-center space-x-6 ml-[16rem] xl:space-x-8">
+          <div className="flex items-center justify-end gap-6 xl:gap-8">
             {navItems.slice(0, 2).map((item, index) => (
               <motion.a
                 key={item.href}
@@ -57,12 +58,13 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="flex items-center gap-3 absolute left-1/2 transform -translate-x-1/2">
+          {/* Center Logo */}
+          <div className="flex items-center px-8">
             <img src="/Logo.svg" alt="Logo" className="w-auto h-12" />
           </div>
 
           {/* Right Navigation */}
-          <div className="hidden lg:flex items-center mr-[16rem] space-x-6 xl:space-x-8">
+          <div className="flex items-center justify-start gap-6 xl:gap-8">
             {navItems.slice(2, 4).map((item, index) => (
               <motion.a
                 key={item.href}
@@ -81,13 +83,21 @@ export default function Navbar() {
               </motion.a>
             ))}
           </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        <div className="flex lg:hidden items-center justify-between h-16 sm:h-20">
+          {/* Logo */}
+          <div className="flex items-center">
+            <img src="/Logo.svg" alt="Logo" className="w-auto h-10 sm:h-12" />
+          </div>
 
           {/* Mobile Menu Button */}
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden text-white p-2 relative z-50"
+            className="text-white p-2 relative z-50"
           >
             <AnimatePresence mode="wait">
               {isMenuOpen ? (

@@ -24,9 +24,9 @@ export function VSLSection() {
   };
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-black to-zinc-950 relative overflow-hidden">
+    <section className="py-20 px-4 bg-black relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 via-transparent to-pink-900/10" />
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/5 via-transparent to-pink-900/5" />
 
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Header */}

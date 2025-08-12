@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
 
 export function ParallaxComponent() {
-  const parallaxRef = useRef<HTMLDivElement>(null);
+  const parallaxRef = useRef(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -81,23 +81,26 @@ export function ParallaxComponent() {
               className="absolute inset-0 w-full h-full object-cover"
             />
 
-            {/* Title */}
+            {/* Title - Fixed for mobile responsiveness */}
             <div
               data-parallax-layer="3"
-              className="absolute inset-0 flex items-center justify-center"
+              className="absolute inset-0 flex items-center justify-center px-4 sm:px-6 md:px-8"
             >
-              <div className="relative">
-                {/* Badge */}
-                <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-purple-800 text-white px-6 py-2 rounded-full text-sm font-medium">
+              <div className="relative w-full max-w-7xl mx-auto">
+                {/* Badge - Responsive positioning */}
+                <div className="flex justify-center mb-4 sm:mb-6 md:mb-8">
+                  <div className=" bg-gradient-to-r from-purple-600 to-pink-500  text-white px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">
                     Trener personalny
                   </div>
                 </div>
 
-                {/* Name */}
-                <h2 className="text-5xl md:text-9xl font-bold text-white">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">
-                    Marcel Kaczmarski
+                {/* Name - Responsive text sizing and centering */}
+                <h2 className="text-center">
+                  <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 leading-tight">
+                    Marcel
+                  </span>
+                  <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 leading-tight">
+                    Kaczmarek
                   </span>
                 </h2>
               </div>
@@ -112,8 +115,8 @@ export function ParallaxComponent() {
               className="absolute inset-0 w-full h-full object-cover"
             />
 
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none"></div>
+            {/* Gradient overlay - Enhanced for better text visibility on mobile */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent pointer-events-none md:via-transparent"></div>
           </div>
         </div>
       </section>
