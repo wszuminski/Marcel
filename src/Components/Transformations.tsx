@@ -20,8 +20,8 @@ export function MetamorphosisSection() {
       achievement: "Pierwsza szóstka w życiu",
       testimonial:
         "Marcel zmienił moje życie. Nie tylko zrzuciłem wagę, ale zyskałem pewność siebie i energię, której nigdy wcześniej nie miałem.",
-      beforeImage: "/before1.jpg",
-      afterImage: "/after1.jpg",
+      beforeImage: "/trans (1).jpg",
+      afterImage: "/trans (2).jpg",
       stats: {
         waga: { before: "95 kg", after: "80 kg" },
         tłuszcz: { before: "28%", after: "15%" },
@@ -35,8 +35,8 @@ export function MetamorphosisSection() {
       achievement: "Pierwszy maraton ukończony",
       testimonial:
         "Myślałam, że sport to nie dla mnie. Marcel pokazał mi, że każdy może być fit. Teraz biegam maratony!",
-      beforeImage: "/before2.jpg",
-      afterImage: "/after2.jpg",
+      beforeImage: "/trans (3).jpg",
+      afterImage: "/trans (4).jpg",
       stats: {
         waga: { before: "78 kg", after: "66 kg" },
         tłuszcz: { before: "32%", after: "22%" },
@@ -50,8 +50,8 @@ export function MetamorphosisSection() {
       achievement: "Zawody kulturystyczne",
       testimonial:
         "Od chuderlaka do zawodnika. Marcel nauczył mnie trenować mądrze, jeść właściwie i nigdy się nie poddawać.",
-      beforeImage: "/before3.jpg",
-      afterImage: "/after3.jpg",
+      beforeImage: "/trans (5).jpg",
+      afterImage: "/trans (6).jpg",
       stats: {
         waga: { before: "65 kg", after: "73 kg" },
         mięśnie: { before: "35 kg", after: "43 kg" },

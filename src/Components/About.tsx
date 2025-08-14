@@ -1,7 +1,23 @@
+//@ts-nocheck
+import { useEffect, useState } from "react";
 import { Dumbbell, Trophy, Heart, Users, Target, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 
+// ⭐ tsParticles (React) — lightweight bundle
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+
 export function About() {
+  // Initialize tsParticles engine once
+  const [particlesReady, setParticlesReady] = useState(false);
+
+  useEffect(() => {
+    initParticlesEngine(async (engine: any) => {
+      // load only the slim bundle for small size; switch to loadFull for advanced effects
+      await loadSlim(engine);
+    }).then(() => setParticlesReady(true));
+  }, []);
+
   const cards = [
     {
       icon: Trophy,
@@ -60,11 +76,65 @@ export function About() {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-black to-zinc-950 to relative overflow-hidden">
-      {/* Background decoration */}
+    <section className="py-20 px-4 bg-gradient-to-b from-black to-zinc-950 relative overflow-hidden">
+      {/* Starfield (tsParticles) */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+        {/* Background blobs */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl z-0" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl z-0" />
+
+        {/* Stars above blobs but under content */}
+        {particlesReady && (
+          <Particles
+            id="about-stars"
+            className="absolute inset-0 z-[1] pointer-events-none"
+            options={{
+              fpsLimit: 60,
+              background: { color: "transparent" },
+              fullScreen: { enable: false },
+              detectRetina: true,
+              particles: {
+                number: {
+                  value: 180,
+                  density: { enable: true, area: 900 },
+                },
+                color: { value: "#ffffff" },
+                shape: { type: "circle" },
+                size: {
+                  value: { min: 0.4, max: 1.8 },
+                },
+                opacity: {
+                  value: { min: 0.25, max: 0.9 },
+                  animation: {
+                    enable: true,
+                    speed: 0.6,
+                    minimumValue: 0.25,
+                    sync: false,
+                  },
+                },
+                move: {
+                  enable: true,
+                  direction: "none",
+                  random: true,
+                  speed: 0.15, // slow drift for a calm starfield
+                  straight: false,
+                  outModes: {
+                    default: "out",
+                  },
+                },
+              },
+              interactivity: {
+                events: {
+                  onHover: { enable: true, mode: "slow" }, // subtle parallax-esque feel
+                  resize: true,
+                },
+                modes: {
+                  slow: { factor: 1.5, radius: 200 },
+                },
+              },
+            }}
+          />
+        )}
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -99,7 +169,7 @@ export function About() {
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             {/* Left - Trainer Image */}
             <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl blur-2xl opacity-30 group-hover:opacity-40 transition-opacity"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl blur-2xl opacity-30 group-hover:opacity-40 transition-opacity" />
               <img
                 src="/image3.jpeg"
                 alt="Personal Trainer"
