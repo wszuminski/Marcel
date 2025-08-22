@@ -16,51 +16,48 @@ import {
   Globe,
   Shield,
   Zap,
+  Calendar,
 } from "lucide-react";
 
 const contactMethods = [
   {
     icon: Mail,
-    title: "Email Us",
-    description: "Get in touch via email",
+    title: "Napisz e-mail",
+    description: "Skontaktuj się ze mną przez e-mail",
     value: "dhileepkumargm@21st.dev",
-    link: "mailto:dhileepkumargm@gmail.com",
+    link: "mailto:dhileepkumargm@21st.dev",
     gradient: "from-blue-500/20 to-cyan-500/20",
     hoverColor: "blue",
   },
   {
     icon: Phone,
-    title: "Call Us",
-    description: "Speak directly with our team",
-    value: "+1 (555) 123-4567",
-    link: "tel:+15551234567",
+    title: "Zadzwoń",
+    description: "Porozmawiajmy bezpośrednio",
+    value: "+48 123 456 789",
+    link: "tel:+48123456789",
     gradient: "from-green-500/20 to-emerald-500/20",
     hoverColor: "green",
   },
   {
     icon: MapPin,
-    title: "Visit Us",
-    description: "Our headquarters",
-    value: "San Francisco, CA",
-    link: "#Europe, Middle East, and Africa (EMEA)",
+    title: "Lokalizacja",
+    description: "Trenuję stacjonarnie i online",
+    value: "Poznań, Polska",
+    link: "https://maps.google.com/?q=Pozna%C5%84%2C%20Polska",
     gradient: "from-purple-500/20 to-pink-500/20",
     hoverColor: "purple",
   },
 ];
 
-const companyStats = [
-  { label: "Response Time", value: "< 2 hours", icon: Clock },
-  { label: "Global Clients", value: "500+", icon: Globe },
-  { label: "Security Level", value: "SOC 2", icon: Shield },
-  { label: "Success Rate", value: "99.9%", icon: Zap },
-];
-
 export function PremiumContact() {
   const [formData, setFormData] = useState({
-    name: "",
+    imie: "",
+    nazwisko: "",
     email: "",
-    company: "",
-    message: "",
+    telefon: "",
+    wiek: "",
+    plec: "",
+    cele: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -77,20 +74,39 @@ export function PremiumContact() {
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
+    if (!formData.imie.trim()) newErrors.imie = "Imię jest wymagane";
+    if (!formData.nazwisko.trim())
+      newErrors.nazwisko = "Nazwisko jest wymagane";
 
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = "E-mail jest wymagany";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email";
+      newErrors.email = "Podaj poprawny adres e-mail";
     }
 
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = "Message must be at least 10 characters";
+    if (!formData.telefon.trim()) {
+      newErrors.telefon = "Numer telefonu jest wymagany";
+    } else {
+      const digits = formData.telefon.replace(/\D/g, "");
+      if (digits.length < 7)
+        newErrors.telefon = "Podaj poprawny numer telefonu";
+    }
+
+    if (!formData.wiek.trim()) {
+      newErrors.wiek = "Wiek jest wymagany";
+    } else {
+      const age = parseInt(formData.wiek, 10);
+      if (Number.isNaN(age) || age < 10 || age > 100) {
+        newErrors.wiek = "Podaj wiek w zakresie 10–100";
+      }
+    }
+
+    if (!formData.plec.trim()) newErrors.plec = "Wybierz płeć";
+
+    if (!formData.cele.trim()) {
+      newErrors.cele = "To pole jest wymagane";
+    } else if (formData.cele.trim().length < 10) {
+      newErrors.cele = "Napisz minimum 10 znaków";
     }
 
     setErrors(newErrors);
@@ -102,7 +118,7 @@ export function PremiumContact() {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    // Simulate API call
+    // Symulacja wywołania API
     await new Promise((resolve) => setTimeout(resolve, 2000));
     setIsSubmitting(false);
     setIsSubmitted(true);
@@ -113,10 +129,7 @@ export function PremiumContact() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.23, 0.86, 0.39, 0.96],
-      },
+      transition: { duration: 0.8, ease: [0.23, 0.86, 0.39, 0.96] },
     },
   };
 
@@ -124,46 +137,29 @@ export function PremiumContact() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
+      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
     },
   };
 
   return (
-    <section className="relative py-32 bg-gradient-to-b from-black via-indigo-950/20 to-black text-white overflow-hidden">
-      {/* Enhanced Background Effects */}
+    <section
+      className="relative py-32 bg-gradient-to-b from-black via-indigo-950/20 to-black text-white overflow-hidden"
+      id="contact"
+    >
+      {/* Tło */}
       <div className="absolute inset-0">
-        {/* Moving orbs */}
+        {/* Ruchome kule */}
         <motion.div
           className="absolute top-1/3 left-1/5 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl"
-          animate={{
-            x: [0, 200, 0],
-            y: [0, 100, 0],
-            scale: [1, 1.3, 1],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ x: [0, 200, 0], y: [0, 100, 0], scale: [1, 1.3, 1] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-1/4 right-1/5 w-80 h-80 bg-rose-400/10 rounded-full blur-3xl"
-          animate={{
-            x: [0, -150, 0],
-            y: [0, -80, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ x: [0, -150, 0], y: [0, -80, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
         />
-
-        {/* Communication lines */}
+        {/* Linie komunikacyjne */}
         <div className="absolute inset-0">
           {[...Array(6)].map((_, i) => (
             <motion.div
@@ -174,10 +170,7 @@ export function PremiumContact() {
                 top: `${25 + i * 8}%`,
                 transform: `rotate(${30 + i * 20}deg)`,
               }}
-              animate={{
-                opacity: [0.2, 0.8, 0.2],
-                scaleY: [1, 1.5, 1],
-              }}
+              animate={{ opacity: [0.2, 0.8, 0.2], scaleY: [1, 1.5, 1] }}
               transition={{
                 duration: 3 + i * 0.5,
                 repeat: Infinity,
@@ -197,31 +190,23 @@ export function PremiumContact() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
-        {/* Header */}
+        {/* Nagłówek */}
         <motion.div className="text-center mb-20" variants={fadeInUp}>
           <motion.h2
             className="text-4xl sm:text-6xl md:text-7xl font-bold mb-8 tracking-tight"
             variants={fadeInUp}
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-              Get in
+              Skontaktuj się
             </span>
             <br />
             <motion.span
               className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-purple-300 to-rose-300"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              style={{
-                backgroundSize: "200% 200%",
-              }}
+              animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              style={{ backgroundSize: "200% 200%" }}
             >
-              Touch
+              ze mną
             </motion.span>
           </motion.h2>
 
@@ -229,23 +214,21 @@ export function PremiumContact() {
             className="text-xl sm:text-2xl text-white/60 max-w-4xl mx-auto leading-relaxed"
             variants={fadeInUp}
           >
-            Ready to transform your business with me? Let's start a conversation
-            about your goals and how we can help you achieve them.
+            Chcesz poprawić sylwetkę, zdrowie i samopoczucie? Napisz do mnie o
+            swoich celach, a pomogę Ci ułożyć skuteczny plan działania.
           </motion.p>
         </motion.div>
 
-        {/* Stats Bar */}
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
+          {/* Formularz kontaktowy */}
           <motion.div className="space-y-8" variants={fadeInUp}>
             <div>
               <h3 className="text-3xl font-bold text-white mb-4">
-                Send us a message
+                Wyślij wiadomość
               </h3>
               <p className="text-white/60 text-lg">
-                Tell us about your project and we'll get back to you within 24
-                hours.
+                Uzupełnij krótki formularz — odpowiem maksymalnie w ciągu 24
+                godzin.
               </p>
             </div>
 
@@ -260,35 +243,64 @@ export function PremiumContact() {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Imię */}
                     <div className="relative">
                       <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/40" />
                       <input
                         type="text"
-                        placeholder="Your Name"
-                        value={formData.name}
+                        placeholder="Imię"
+                        value={formData.imie}
                         onChange={(e) =>
-                          handleInputChange("name", e.target.value)
+                          handleInputChange("imie", e.target.value)
                         }
                         className={`w-full pl-10 pr-4 py-4 bg-white/[0.08] border rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-indigo-400 transition-all ${
-                          errors.name ? "border-red-400" : "border-white/[0.15]"
+                          errors.imie ? "border-red-400" : "border-white/[0.15]"
                         }`}
                       />
-                      {errors.name && (
+                      {errors.imie && (
                         <motion.p
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
                           className="text-red-400 text-sm mt-2"
                         >
-                          {errors.name}
+                          {errors.imie}
                         </motion.p>
                       )}
                     </div>
 
+                    {/* Nazwisko */}
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/40" />
+                      <input
+                        type="text"
+                        placeholder="Nazwisko"
+                        value={formData.nazwisko}
+                        onChange={(e) =>
+                          handleInputChange("nazwisko", e.target.value)
+                        }
+                        className={`w-full pl-10 pr-4 py-4 bg-white/[0.08] border rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-indigo-400 transition-all ${
+                          errors.nazwisko
+                            ? "border-red-400"
+                            : "border-white/[0.15]"
+                        }`}
+                      />
+                      {errors.nazwisko && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="text-red-400 text-sm mt-2"
+                        >
+                          {errors.nazwisko}
+                        </motion.p>
+                      )}
+                    </div>
+
+                    {/* E-mail */}
                     <div className="relative">
                       <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/40" />
                       <input
                         type="email"
-                        placeholder="Email Address"
+                        placeholder="E-mail"
                         value={formData.email}
                         onChange={(e) =>
                           handleInputChange("email", e.target.value)
@@ -309,43 +321,122 @@ export function PremiumContact() {
                         </motion.p>
                       )}
                     </div>
+
+                    {/* Telefon */}
+                    <div className="relative">
+                      <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/40" />
+                      <input
+                        type="tel"
+                        placeholder="Numer telefonu"
+                        value={formData.telefon}
+                        onChange={(e) =>
+                          handleInputChange("telefon", e.target.value)
+                        }
+                        className={`w-full pl-10 pr-4 py-4 bg-white/[0.08] border rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-indigo-400 transition-all ${
+                          errors.telefon
+                            ? "border-red-400"
+                            : "border-white/[0.15]"
+                        }`}
+                      />
+                      {errors.telefon && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="text-red-400 text-sm mt-2"
+                        >
+                          {errors.telefon}
+                        </motion.p>
+                      )}
+                    </div>
+
+                    {/* Wiek */}
+                    <div className="relative">
+                      <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/40" />
+                      <input
+                        type="number"
+                        min={10}
+                        max={100}
+                        placeholder="Wiek"
+                        value={formData.wiek}
+                        onChange={(e) =>
+                          handleInputChange("wiek", e.target.value)
+                        }
+                        className={`w-full pl-10 pr-4 py-4 bg-white/[0.08] border rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-indigo-400 transition-all ${
+                          errors.wiek ? "border-red-400" : "border-white/[0.15]"
+                        }`}
+                      />
+                      {errors.wiek && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="text-red-400 text-sm mt-2"
+                        >
+                          {errors.wiek}
+                        </motion.p>
+                      )}
+                    </div>
+
+                    {/* Płeć */}
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/40" />
+                      <select
+                        value={formData.plec}
+                        onChange={(e) =>
+                          handleInputChange("plec", e.target.value)
+                        }
+                        className={`w-full pl-10 pr-10 py-4 bg-white/[0.08] border rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-indigo-400 transition-all appearance-none ${
+                          errors.plec ? "border-red-400" : "border-white/[0.15]"
+                        }`}
+                      >
+                        <option value="" className="bg-black">
+                          Płeć
+                        </option>
+                        <option value="Kobieta" className="bg-black">
+                          Kobieta
+                        </option>
+                        <option value="Mężczyzna" className="bg-black">
+                          Mężczyzna
+                        </option>
+                        <option
+                          value="Inna / wolę nie mówić"
+                          className="bg-black"
+                        >
+                          Inna / wolę nie mówić
+                        </option>
+                      </select>
+                      {errors.plec && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="text-red-400 text-sm mt-2"
+                        >
+                          {errors.plec}
+                        </motion.p>
+                      )}
+                    </div>
                   </div>
 
-                  <div className="relative">
-                    <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/40" />
-                    <input
-                      type="text"
-                      placeholder="Company (Optional)"
-                      value={formData.company}
-                      onChange={(e) =>
-                        handleInputChange("company", e.target.value)
-                      }
-                      className="w-full pl-10 pr-4 py-4 bg-white/[0.08] border border-white/[0.15] rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-indigo-400 transition-all"
-                    />
-                  </div>
-
+                  {/* Cele i oczekiwania */}
                   <div className="relative">
                     <MessageSquare className="absolute left-3 top-4 h-5 w-5 text-white/40" />
                     <textarea
-                      placeholder="Tell us about your project..."
+                      placeholder="Napisz mi swoje cele krótko- i długoterminowe, bądź swoją propozycję — czego byś ode mnie oczekiwał/a (trener personalny)."
                       rows={6}
-                      value={formData.message}
+                      value={formData.cele}
                       onChange={(e) =>
-                        handleInputChange("message", e.target.value)
+                        handleInputChange("cele", e.target.value)
                       }
                       className={`w-full pl-10 pr-4 py-4 bg-white/[0.08] border rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-indigo-400 transition-all resize-none ${
-                        errors.message
-                          ? "border-red-400"
-                          : "border-white/[0.15]"
+                        errors.cele ? "border-red-400" : "border-white/[0.15]"
                       }`}
                     />
-                    {errors.message && (
+                    {errors.cele && (
                       <motion.p
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="text-red-400 text-sm mt-2"
                       >
-                        {errors.message}
+                        {errors.cele}
                       </motion.p>
                     )}
                   </div>
@@ -377,7 +468,7 @@ export function PremiumContact() {
                       ) : (
                         <>
                           <Send className="h-5 w-5" />
-                          Send Message
+                          Wyślij wiadomość
                           <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                         </>
                       )}
@@ -400,41 +491,43 @@ export function PremiumContact() {
                     <CheckCircle className="w-10 h-10 text-green-400" />
                   </motion.div>
                   <h3 className="text-2xl font-bold text-white mb-4">
-                    Message Sent!
+                    Wiadomość wysłana!
                   </h3>
                   <p className="text-white/60 text-lg mb-6">
-                    Thank you for reaching out. We'll get back to you within 24
-                    hours.
+                    Dziękuję za kontakt. Odpowiem w ciągu 24 godzin.
                   </p>
                   <motion.button
                     onClick={() => {
                       setIsSubmitted(false);
                       setFormData({
-                        name: "",
+                        imie: "",
+                        nazwisko: "",
                         email: "",
-                        company: "",
-                        message: "",
+                        telefon: "",
+                        wiek: "",
+                        plec: "",
+                        cele: "",
                       });
                     }}
                     className="px-6 py-3 bg-white/[0.08] border border-white/[0.15] rounded-full text-white hover:bg-white/[0.12] transition-all"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    Send Another Message
+                    Wyślij kolejną wiadomość
                   </motion.button>
                 </motion.div>
               )}
             </AnimatePresence>
           </motion.div>
 
-          {/* Contact Methods */}
+          {/* Metody kontaktu */}
           <motion.div className="space-y-8" variants={fadeInUp}>
             <div>
               <h3 className="text-3xl font-bold text-white mb-4">
-                Other ways to reach us
+                Inne formy kontaktu
               </h3>
               <p className="text-white/60 text-lg">
-                Choose the method that works best for you.
+                Wybierz sposób, który najbardziej Ci odpowiada.
               </p>
             </div>
 
@@ -472,15 +565,12 @@ export function PremiumContact() {
           </motion.div>
         </div>
 
-        {/* Floating Elements */}
+        {/* Pływające elementy */}
         {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 bg-white/20 rounded-full"
-            style={{
-              left: `${10 + i * 12}%`,
-              top: `${20 + i * 10}%`,
-            }}
+            style={{ left: `${10 + i * 12}%`, top: `${20 + i * 10}%` }}
             animate={{
               y: [0, -40, 0],
               opacity: [0.2, 0.8, 0.2],

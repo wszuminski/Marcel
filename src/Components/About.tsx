@@ -21,16 +21,16 @@ export function About() {
   const cards = [
     {
       icon: Trophy,
-      title: "Certyfikowany Trener",
+      title: "Dyplomowany Trener",
       description:
-        "NASM Certified Personal Trainer z specjalizacją w treningu siłowym i żywieniu sportowym",
+        "Studia AWF Poznań - kierunek sport z specjalizacją ze specjalizacją trenerską ze sportów walki.",
       color: "from-pink-500/20 to-pink-600/20",
       iconColor: "text-pink-500",
       borderColor: "border-pink-500/30",
     },
     {
       icon: Users,
-      title: "500+ Transformacji",
+      title: "50+ Transformacji",
       description:
         "Pomogłem setkom klientów osiągnąć ich cele - od redukcji wagi po przygotowanie do zawodów",
       color: "from-indigo-500/20 to-indigo-600/20",
@@ -50,7 +50,7 @@ export function About() {
       icon: Heart,
       title: "Holistyczne Podejście",
       description:
-        "Fitness to więcej niż ćwiczenia - skupiam się na zdrowiu mentalnym i zrównoważonym stylu życia",
+        "Sport to więcej niż ćwiczenia - skupiam się na zdrowiu mentalnym i zrównoważonym stylu życia",
       color: "from-red-500/20 to-pink-500/20",
       iconColor: "text-red-500",
       borderColor: "border-red-500/30",
@@ -68,7 +68,7 @@ export function About() {
       icon: Target,
       title: "Twój Cel, Moja Misja",
       description:
-        "Niezależnie od tego, czy zaczynasz swoją przygodę z fitnessem, czy dążysz do perfekcji - jestem tu dla Ciebie",
+        "Niezależnie od tego, czy zaczynasz swoją przygodę z treningami, czy dążysz do perfekcji - jestem tu dla Ciebie",
       color: "from-cyan-500/20 to-cyan-500/20",
       iconColor: "text-cyan-500",
       borderColor: "border-cyan-500/30",
@@ -76,7 +76,10 @@ export function About() {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-black to-zinc-950 relative overflow-hidden">
+    <section
+      className="py-20 px-4 bg-gradient-to-b from-black to-zinc-950 relative overflow-hidden"
+      id="about"
+    >
       {/* Starfield (tsParticles) */}
       <div className="absolute inset-0">
         {/* Background blobs */}
@@ -153,7 +156,7 @@ export function About() {
             </span>
           </h2>
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-            Zmieniam życie poprzez spersonalizowane programy treningowe od ponad
+            Zmieniam życie poprzez indywidualne podejście do sytuacji od ponad
             dekady. Każda transformacja to unikalna historia sukcesu.
           </p>
         </motion.div>
@@ -171,13 +174,13 @@ export function About() {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl blur-2xl opacity-30 group-hover:opacity-40 transition-opacity" />
               <img
-                src="/image3.jpeg"
+                src="/image3.webp"
                 alt="Personal Trainer"
-                className="relative rounded-3xl w-full h-[500px] object-cover shadow-2xl"
+                className="relative rounded-3xl w-full md:h-[650px] lg:h-[650px] sm:h-[350px] h-650px object-cover shadow-2xl"
               />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8 rounded-b-3xl">
                 <h3 className="text-3xl font-bold text-white mb-2">
-                  Marcel Kaczmarski
+                  Marcel Kaczmarek
                 </h3>
                 <p className="text-purple-400 font-medium">
                   Master Trainer & Nutrition Coach
@@ -197,25 +200,45 @@ export function About() {
                   Cześć! Jestem Marcel
                 </h3>
                 <p className="text-gray-300 leading-relaxed mb-4">
-                  Fitness to moja pasja, którą dzielę się z innymi od ponad 10
-                  lat. Wierzę, że każdy zasługuje na to, by czuć się silny,
-                  zdrowy i pewny siebie.
+                  Sport to moja pasja, która towarzyszy mi od dzieciństwa. Na
+                  początku chciałem zrzucić zbędne kilogramy i podnieść swoją
+                  sprawność. Wszystko zaczęło się na treningach zapasów i
+                  ćwiczeń w domu. Dziś jestem wielokrotnym medalistom mistrzostw
+                  Polski oraz turniei międzynarodowych w zapasach stylu
+                  klasycznym. Moja karierę zapaśnicza skończyłem wraz z ostatnim
+                  medalem w grupie Juniora żeby móc rozwijać się w pełni jako
+                  trener oraz odhaczać kolejne cele sportowe. Uwielbiam trening
+                  siłowy w każdej postaci od ćwiczeń z masą ciała do dźwigania
+                  na siłowni. Wierzę, że każdy zasługuje na to, aby czuć się
+                  silny, zdrowy i pewny siebie.
                 </p>
                 <p className="text-gray-300 leading-relaxed mb-4">
-                  Moje podejście łączy naukową wiedzę z praktycznym
-                  doświadczeniem. Nie stosuję uniwersalnych rozwiązań - każdy
-                  plan jest tak unikalny jak Ty.
+                  Ukończyłem studia z zakresu sportu ze specjalizacją trenerską
+                  ze sportów walki. Obecnie kończę studia magisterskie z
+                  przygotowania motorycznego w sporcie. W swoim repertuarze mam
+                  również kursy trenerskie, które zacząłem robić po 17
+                  urodzinach. Wiedzę teoretyczną łączę z ogromnym doświadczeniem
+                  praktycznym oraz ciekawością do sportu. Każdy plan jest tak
+                  unikalny jak twoja sytuacja
                 </p>
-                <p className="text-gray-300 leading-relaxed">
-                  Razem stworzymy program, który nie tylko zmieni Twoje ciało,
-                  ale też sposób myślenia o zdrowiu i fitness.
+                <p
+                  className="
+                text-gray-300 leading-relaxed mb-4"
+                >
+                  Tu nie chodzi o plan treningowy. Nauczę Cię postrzegać zdrowy
+                  tryb życia inaczej niż robiłeś to dotychczas. Nie chcę żebyś
+                  miał restrykcyjną dietę i niechęć do treningu. Zbudujemy
+                  pozytywny nawyk, który pomoże Ci wprowadzić zmiany w swojej
+                  rutynie dnia. Trening jest dla Ciebie, nie Ty dla niego. Jeśli
+                  nigdy go nie polubiłeś, to znaczy że nikt nie pokazał Ci
+                  treningu DLA CIEBIE.
                 </p>
               </motion.div>
 
               {/* Stats */}
               <div className="grid grid-cols-3 gap-4">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400">500+</div>
+                  <div className="text-3xl font-bold text-purple-400">200+</div>
                   <div className="text-sm text-gray-400">Klientów</div>
                 </div>
                 <div className="text-center">
@@ -223,8 +246,8 @@ export function About() {
                   <div className="text-sm text-gray-400">Lat</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400">98%</div>
-                  <div className="text-sm text-gray-400">Sukcesu</div>
+                  <div className="text-3xl font-bold text-purple-400">100%</div>
+                  <div className="text-sm text-gray-400">Satysfakcji</div>
                 </div>
               </div>
             </div>
@@ -294,7 +317,7 @@ export function About() {
             {/* Training Session */}
             <div className="relative group overflow-hidden rounded-2xl">
               <img
-                src="/image0.jpeg"
+                src="/image0.webp"
                 alt="Training session"
                 className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
               />
@@ -313,7 +336,7 @@ export function About() {
             {/* Nutrition Coaching */}
             <div className="relative group overflow-hidden rounded-2xl">
               <img
-                src="/image2 (1).jpeg"
+                src="/image2 (1).webp"
                 alt="Gym coaching"
                 className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110 object-[center_30%]"
               />
@@ -330,7 +353,7 @@ export function About() {
             {/* Results */}
             <div className="relative group overflow-hidden rounded-2xl">
               <img
-                src="/image1 (1).jpeg"
+                src="/image1 (1).webp"
                 alt="Fitness results"
                 className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
               />

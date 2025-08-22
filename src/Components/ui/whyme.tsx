@@ -29,35 +29,35 @@ interface Achievement {
 }
 
 const stats: Stat[] = [
-  { number: "500+", label: "Zmienionych Życii", icon: Users },
-  { number: "5+", label: "Lat Doświadczenia", icon: Calendar },
-  { number: "98%", label: "Skuteczność", icon: TrendingUp },
-  { number: "24/7", label: "Wsparcie Online", icon: Heart },
+  { number: "200+", label: "Zadowolonych klientów", icon: Users },
+  { number: "10+", label: "Lat Doświadczenia", icon: Calendar },
+  { number: "100%", label: "Skuteczność", icon: TrendingUp },
+  { number: "24h", label: "Wsparcie Online", icon: Heart },
 ];
 
 const achievements: Achievement[] = [
   {
-    title: "Certyfikowany Trener Personalny",
+    title: "Wiedza potwierdzona rezultatami",
     description:
-      "Certyfikat NASM-CPT z zaawansowanymi specjalizacjami w treningu siłowym i żywieniu",
+      "Wszyscy moi klienci osiągają zamierzone efekty, często nawet zaskakując samych siebie jak szybko przyszły.",
     icon: Medal,
   },
   {
-    title: "Specjalista ds. Żywienia",
+    title: "Wiedza dietetyczna",
     description:
-      "Certyfikat Precision Nutrition Level 1 do optymalizacji planów żywieniowych",
+      "Przeprowadziłem setki klientów przez redukcje bez głodu poprzez własne wypracowane schematy",
     icon: Apple,
   },
   {
-    title: "Ekspert Prewencji Urazów",
+    title: "Ekspert kalisteniki",
     description:
-      "Specjalista ćwiczeń korekcyjnych pomagający trenować bezpiecznie i szybciej się regenerować",
+      "Pokarzę Ci jak można wykorzystać własną wagę ciała do osiągnięcia wymarzonej sylwetki jednoczesnie poprawiając sprawność.",
     icon: Shield,
   },
   {
-    title: "Coach Mentalny",
+    title: "Stałe wsparcie",
     description:
-      "Coaching mentalny do budowania trwałych nawyków i przełamywania barier",
+      "Stale pomagam udoskonalać technikę, wprowadzać poprawki w diecie i w planach treningowych, aby nadal przynosiły genialne rezultaty",
     icon: Brain,
   },
 ];
@@ -153,7 +153,7 @@ const WhyMeSection: React.FC = () => {
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Ze sprawdzonymi rezultatami, spersonalizowanym podejściem i
             niezachwianym zaangażowaniem w Twój sukces, jestem tu, aby zmienić
-            nie tylko Twoje ciało, ale całe podejście do fitnessu.
+            nie tylko Twoje ciało, ale całe podejście do treningów.
           </p>
         </motion.div>
 
@@ -224,8 +224,8 @@ const WhyMeSection: React.FC = () => {
                     Ciągłe Wsparcie
                   </h4>
                   <p className="text-gray-300">
-                    Całodobowy dostęp do wskazówek, motywacji i wsparcia przez
-                    naszą aplikację.
+                    Codzienny kontakt ze mną pozwala Ci na bierząco korygować
+                    błędy i rozszerzać swoją wiedzę na temat treningów.
                   </p>
                 </div>
               </div>
@@ -241,17 +241,17 @@ const WhyMeSection: React.FC = () => {
           >
             <div className="relative rounded-2xl overflow-hidden">
               <img
-                src="/image0.jpeg"
+                src="/image0.webp"
                 alt="Trener Personalny"
                 className="w-full h-[500px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
                 <h4 className="text-white text-2xl font-bold mb-2">
-                  Marcel Kaczmarski
+                  Marcel Kaczmarek
                 </h4>
                 <p className="text-purple-400 font-semibold">
-                  Certyfikowany Trener Personalny i Coach Żywieniowy
+                  Dyplomowany Trener Personalny
                 </p>
               </div>
             </div>

@@ -5,10 +5,10 @@ import { GallerySection } from "./Gallery";
 import Navbar from "./Navbar";
 import ParallaxDemo from "./ParallaxHero";
 import { Pricing } from "./Pricing";
-import { Testimonials } from "./Testimonials";
+import Testimonials from "./Testimonials";
 import { MetamorphosisSection } from "./Transformations";
 import WhyMeSectionDemo from "./ui/whyme";
-import { VSLSection } from "./VideoSection";
+// import { VSLSection } from "./VideoSection";
 
 export function Hero() {
   return (
@@ -19,7 +19,7 @@ export function Hero() {
       </div>
 
       <ParallaxDemo />
-      <VSLSection />
+      {/* <VSLSection /> */}
 
       <About />
       <WhyMeSectionDemo />

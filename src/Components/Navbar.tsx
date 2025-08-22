@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSmoothScroll } from "./hooks/useScroll";
 
 export default function Navbar() {
+  const scrollTo = useSmoothScroll();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -17,10 +19,10 @@ export default function Navbar() {
   }, []);
 
   const navItems = [
-    { href: "#oferta", label: "Oferta" },
-    { href: "#przemiany", label: "Przemiany" },
-    { href: "#omnie", label: "O mnie" },
-    { href: "#kontakt", label: "Kontakt" },
+    { id: "services", label: "Oferta" },
+    { id: "transformations", label: "Przemiany" },
+    { id: "about", label: "O mnie" },
+    { id: "contact", label: "Kontakt" },
   ];
 
   return (
@@ -30,7 +32,7 @@ export default function Navbar() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-zinc-950/95 backdrop-blur-xl border-b border-purple-500/20"
+          ? "bg-zinc-950/50 backdrop-blur-xl border-b border-purple-500/20"
           : "bg-transparent"
       }`}
     >
@@ -40,9 +42,9 @@ export default function Navbar() {
           {/* Left Navigation */}
           <div className="flex items-center justify-end gap-6 xl:gap-8">
             {navItems.slice(0, 2).map((item, index) => (
-              <motion.a
-                key={item.href}
-                href={item.href}
+              <motion.button
+                key={item.id}
+                onClick={() => scrollTo(item.id)}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
@@ -54,21 +56,21 @@ export default function Navbar() {
                   className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 group-hover:w-full transition-all duration-300"
                   whileHover={{ width: "100%" }}
                 />
-              </motion.a>
+              </motion.button>
             ))}
           </div>
 
           {/* Center Logo */}
-          <div className="flex items-center px-8">
-            <img src="/Logo.svg" alt="Logo" className="w-auto h-12" />
+          <div className="flex items-center px-6 -mt-2">
+            <img src="/Logo.svg" alt="Logo" className="w-auto h-14" />
           </div>
 
           {/* Right Navigation */}
           <div className="flex items-center justify-start gap-6 xl:gap-8">
             {navItems.slice(2, 4).map((item, index) => (
-              <motion.a
-                key={item.href}
-                href={item.href}
+              <motion.button
+                key={item.id}
+                onClick={() => scrollTo(item.id)}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: (index + 2) * 0.1, duration: 0.5 }}
@@ -80,7 +82,7 @@ export default function Navbar() {
                   className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 group-hover:w-full transition-all duration-300"
                   whileHover={{ width: "100%" }}
                 />
-              </motion.a>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -137,17 +139,19 @@ export default function Navbar() {
             >
               <div className="py-4 sm:py-6 space-y-2 sm:space-y-4 border-t border-purple-500/20">
                 {navItems.map((item, index) => (
-                  <motion.a
-                    key={item.href}
-                    href={item.href}
+                  <motion.button
+                    key={item.id}
+                    onClick={() => {
+                      scrollTo(item.id);
+                      setIsMenuOpen(false);
+                    }}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1, duration: 0.3 }}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block text-white hover:text-purple-300 transition-colors py-2 sm:py-3 px-4 font-semibold hover:bg-purple-500/10 rounded-lg text-sm sm:text-base"
+                    className="block w-full text-left text-white hover:text-purple-300 transition-colors py-2 sm:py-3 px-4 font-semibold hover:bg-purple-500/10 rounded-lg text-sm sm:text-base"
                   >
                     {item.label}
-                  </motion.a>
+                  </motion.button>
                 ))}
               </div>
             </motion.div>

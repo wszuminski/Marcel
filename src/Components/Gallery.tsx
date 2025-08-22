@@ -8,28 +8,28 @@ export function GallerySection() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const images = [
     {
-      src: "/image0 (1).jpeg",
+      src: "/image0 (1).webp",
     },
     {
-      src: "/image0.jpeg",
+      src: "/image0.webp",
     },
     {
-      src: "/image1 (1).jpeg",
+      src: "/image1 (1).webp",
     },
     {
-      src: "/image1.jpeg",
+      src: "/image1.webp",
     },
     {
-      src: "/image2 (1).jpeg",
+      src: "/image2 (1).webp",
     },
     {
-      src: "/image2.jpeg",
+      src: "/image2.webp",
     },
     {
-      src: "/image3.jpeg",
+      src: "/image3.webp",
     },
     {
-      src: "/image4.jpeg",
+      src: "/image4.webp",
     },
   ];
 

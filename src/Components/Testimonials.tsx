@@ -1,117 +1,104 @@
-import { GridBody, DraggableContainer, GridItem } from "./ui/testimonials";
+import { motion } from "motion/react";
 
-const images = [
-  {
-    id: 1,
-    alt: "Silhouette of a traditional Japanese pagoda at sunset",
-    src: "/image4.jpeg",
-  },
-  {
-    id: 2,
-    alt: "Himeji Castle on a clear day",
-    src: "https://images.unsplash.com/photo-1491884662610-dfcd28f30cfb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 3,
-    alt: "Red Car",
-    src: "https://images.unsplash.com/photo-1536901766856-5d45744cd180?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTA2fHxqYXBhbnxlbnwwfDF8MHx8fDA%3D",
-  },
-  {
-    id: 4,
-    alt: "Woman in kimono standing beside a traditional Japanese house",
-    src: "https://images.unsplash.com/photo-1505069446780-4ef442b5207f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 5,
-    alt: "Group of men in black suits inside a hallway",
-    src: "https://images.unsplash.com/photo-1554797589-7241bb691973?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 6,
-    alt: "Crowd walking through a street decorated with red lanterns",
-    src: "https://images.unsplash.com/photo-1596713109885-c94bdfd7f19d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 7,
-    alt: "Timelapse of traffic lights and buildings at night",
-    src: "https://images.unsplash.com/photo-1498036882173-b41c28a8ba34?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 8,
-    alt: "Close-up of orange and black wooden torii gate posts",
-    src: "https://images.unsplash.com/photo-1585028281328-54ec883cd7cf?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 9,
-    alt: "Historic building with brown and white stone exterior in daylight",
-    src: "https://images.unsplash.com/photo-1614003024056-e3ecbf8888f7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 10,
-    alt: "Lantern glowing on a quiet street at night",
-    src: "https://images.unsplash.com/photo-1573455494057-12684d151bf4?q=80&w=1924&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 11,
-    alt: "View of Osaka Castle with clear sky backdrop",
-    src: "https://images.unsplash.com/photo-1575489129683-4f7d23379975?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 12,
-    alt: "Pagoda silhouetted during golden hour",
-    src: "https://images.unsplash.com/photo-1512692723619-8b3e68365c9c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 13,
-    alt: "Himeji Castle seen from a distance",
-    src: "https://images.unsplash.com/photo-1491884662610-dfcd28f30cfb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 14,
-    alt: "Torii gate pillars in vibrant orange and black",
-    src: "https://images.unsplash.com/photo-1585028281328-54ec883cd7cf?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 15,
-    alt: "Traditional Japanese home under daylight",
-    src: "https://images.unsplash.com/photo-1505069446780-4ef442b5207f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 16,
-    alt: "Women wearing kimono beside wooden house",
-    src: "https://images.unsplash.com/photo-1505069446780-4ef442b5207f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 17,
-    alt: "People passing under hanging red lanterns at dusk",
-    src: "https://images.unsplash.com/photo-1596713109885-c94bdfd7f19d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 18,
-    alt: "Stepping stone path winding through lush forest",
-    src: "https://plus.unsplash.com/premium_photo-1673285285994-6bfff235db97?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
+/**
+ * Animated marquee row that loops a strip of testimonial images.
+ * Images are expected in the Next.js /public folder (e.g., "/opinion1.webp").
+ */
+function MarqueeRow({
+  sources,
+  duration = 28,
+  reverse = false,
+  className = "",
+}: {
+  sources: string[];
+  duration?: number; // seconds for one full cycle
+  reverse?: boolean; // scroll direction
+  className?: string;
+}) {
+  // Duplicate the list once so that translating -50% yields a seamless loop
+  const strip = [...sources, ...sources];
+
+  return (
+    <div
+      className={
+        "relative overflow-hidden w-full " +
+        // soft edge fade for nicer looping
+        "[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] " +
+        className
+      }
+    >
+      <motion.div
+        aria-hidden
+        className="flex items-center gap-6 min-w-max will-change-transform"
+        animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
+        transition={{ duration, ease: "linear", repeat: Infinity }}
+      >
+        {strip.map((src, i) => (
+          <img
+            key={`${src}-${i}`}
+            src={src}
+            alt={`Customer testimonial ${((i % sources.length) + 1)
+              .toString()
+              .padStart(2, "0")}`}
+            loading="lazy"
+            className={
+              // Big, readable, never cropped
+              "h-64 sm:h-72 md:h-80 lg:h-[26rem] xl:h-[28rem] w-auto object-contain " +
+              "rounded-xl border shadow-lg bg-background"
+            }
+          />
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+const IMAGES = [
+  "/opinion1.webp",
+  "/opinion2.webp",
+  "/opinion3.webp",
+  "/opinion4.webp",
+  "/opinion5.webp",
+  "/opinion6.webp",
+  "/opinion7.webp",
 ];
 
-const Testimonials = () => {
-  return (
-    <DraggableContainer variant="masonry">
-      <GridBody>
-        {images.map((image) => (
-          <GridItem
-            key={image.id}
-            className="relative h-54 w-36 md:h-96 md:w-64"
-          >
-            <img
-              src={image.src}
-              alt={image.alt}
-              className="pointer-events-none absolute h-full w-full object-cover"
-            />
-          </GridItem>
-        ))}
-      </GridBody>
-    </DraggableContainer>
-  );
-};
+export default function Testimonials() {
+  // Split images between rows for variety (odd/even split keeps sizes balanced)
+  const rowA = IMAGES.filter((_, i) => i % 2 === 0); // 1,3,5,7
+  const rowB = IMAGES.filter((_, i) => i % 2 === 1); // 2,4,6
 
-export { Testimonials };
+  return (
+    <section className="bg-background my-20 relative">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
+          className="flex flex-col items-center justify-center max-w-[720px] mx-auto text-center"
+        >
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
+            Co mówią moi podopieczni?
+          </h2>
+          <p className="text-lg md:text-xl text-center mt-5 opacity-75">
+            Nic tak nie świadczy o efektywności trenera jak rezultaty jego
+            podopiecznych.
+          </p>
+        </motion.div>
+
+        {/* Rows */}
+        <div className="mt-10 flex flex-col gap-8">
+          {/* Row 1: always visible */}
+          <MarqueeRow sources={rowA} duration={26} />
+
+          {/* Row 2: desktop only (hidden on mobile) */}
+          <div className="hidden md:block">
+            <MarqueeRow sources={rowB} duration={32} reverse />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

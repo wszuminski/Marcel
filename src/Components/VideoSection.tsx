@@ -24,7 +24,7 @@ export function VSLSection() {
   };
 
   return (
-    <section className="py-20 px-4 bg-black relative overflow-hidden">
+    <section className="py-20 px-4 bg-black relative overflow-hidden" id="vsl">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/5 via-transparent to-pink-900/5" />
 
@@ -157,7 +157,7 @@ export function VSLSection() {
         >
           <div className="flex flex-wrap justify-center gap-8 text-gray-400">
             <div className="flex items-center gap-2">
-              <span className="text-purple-400 text-2xl font-bold">500+</span>
+              <span className="text-purple-400 text-2xl font-bold">200+</span>
               <span>Zadowolonych klientów</span>
             </div>
             <div className="flex items-center gap-2">
@@ -165,8 +165,8 @@ export function VSLSection() {
               <span>Lat doświadczenia</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-purple-400 text-2xl font-bold">98%</span>
-              <span>Osiąga cele</span>
+              <span className="text-purple-400 text-2xl font-bold">100%</span>
+              <span>Satysfakcji z prowadzenia</span>
             </div>
           </div>
         </motion.div>

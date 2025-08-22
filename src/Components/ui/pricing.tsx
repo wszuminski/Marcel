@@ -2,33 +2,14 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ArrowRight } from "lucide-react";
-
+import { useSmoothScroll } from "../hooks/useScroll";
 const pricingPlans = [
-  {
-    name: "Start",
-    subtitle: "Idealny na początek",
-    price: 299,
-    description: "Podstawowy plan treningowy dla początkujących",
-
-    gradient: "from-indigo-500/20 to-purple-500/20",
-    borderGradient: "from-blue-400 to-cyan-400",
-    features: [
-      "4 treningi miesięcznie",
-      "Plan treningowy",
-      "Konsultacje dietetyczne",
-      "Wsparcie przez e-mail",
-      "Dostęp do aplikacji",
-      "Pomiary co 2 tygodnie",
-    ],
-    highlight: false,
-    badge: null,
-  },
   {
     name: "Profesjonalny",
     subtitle: "Najpopularniejszy wybór",
     price: 599,
+    showPrice: true,
     description: "Kompleksowa transformacja z pełnym wsparciem",
-
     gradient: "from-indigo-600/20 to-purple-600/20",
     borderGradient: "from-indigo-400 to-purple-400",
     features: [
@@ -47,9 +28,10 @@ const pricingPlans = [
   {
     name: "VIP",
     subtitle: "Maksymalne rezultaty",
-    price: 999,
+    price: null,
+    showPrice: false,
+    priceText: "Wycena indywidualna",
     description: "Ekskluzywny program dla wymagających klientów",
-
     gradient: "from-indigo-500/20 to-purple-500/20",
     borderGradient: "from-rose-400 to-pink-400",
     features: [
@@ -68,6 +50,7 @@ const pricingPlans = [
 ];
 
 export function PersonalTrainerPricing() {
+  const scrollTo = useSmoothScroll();
   const [hoveredPlan, setHoveredPlan] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -113,7 +96,10 @@ export function PersonalTrainerPricing() {
   };
 
   return (
-    <section className="relative py-32 bg-gradient-to-b from-zinc-950 via-indigo-950/20 to-zinc-950 text-white overflow-hidden">
+    <section
+      className="relative py-32 bg-gradient-to-b from-zinc-950 via-indigo-950/20 to-zinc-950 text-white overflow-hidden"
+      id="services"
+    >
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0">
         {/* Moving orbs */}
@@ -177,45 +163,37 @@ export function PersonalTrainerPricing() {
         viewport={{ once: true, margin: "-100px" }}
       >
         {/* Header */}
-        <motion.div className="text-center mb-20" variants={fadeInUp}>
+        <motion.div className="text-center mb-16 sm:mb-20" variants={fadeInUp}>
           <motion.h2
-            className="text-4xl sm:text-6xl md:text-7xl font-bold mb-8 tracking-tight"
+            className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.1]"
             variants={fadeInUp}
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
               Wybierz swój plan
             </span>
+            {/* Space between lines & bigger animated line */}
             <br />
             <motion.span
-              className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-purple-300 to-rose-300"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              style={{
-                backgroundSize: "200% 200%",
-              }}
+              className="block mt-3 pb-3 pt-2 text-5xl sm:text-6xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-purple-300 to-rose-300"
+              animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              style={{ backgroundSize: "200% 200%" }}
             >
               Treningu Personalnego
             </motion.span>
           </motion.h2>
 
           <motion.p
-            className="text-xl sm:text-2xl text-white/60 max-w-4xl mx-auto leading-relaxed mb-12"
+            className="mt-6 text-xl sm:text-2xl text-white/60 max-w-4xl mx-auto leading-relaxed"
             variants={fadeInUp}
           >
             Odkryj swoją najlepszą formę z profesjonalnym wsparciem. Każdy plan
             dostosowany do Twoich celów i możliwości.
           </motion.p>
         </motion.div>
-
-        {/* Pricing Cards */}
+        {/* Pricing Cards - Changed to 2 columns with better centering */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20 max-w-5xl mx-auto"
           variants={staggerContainer}
         >
           {pricingPlans.map((plan, index) => (
@@ -271,7 +249,7 @@ export function PersonalTrainerPricing() {
 
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Plan Info */}
-                  <h3 className="text-2xl font-bold text-white mb-2">
+                  <h3 className="text-3xl font-bold text-white mb-2">
                     {plan.name}
                   </h3>
                   <p className="text-white/60 text-sm mb-4">{plan.subtitle}</p>
@@ -280,10 +258,18 @@ export function PersonalTrainerPricing() {
                   {/* Price */}
                   <div className="mb-8">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-4xl font-bold text-white">
-                        {plan.price} zł
-                      </span>
-                      <span className="text-white/60">/miesiąc</span>
+                      {plan.showPrice ? (
+                        <>
+                          <span className="text-5xl font-bold text-white">
+                            {plan.price} zł
+                          </span>
+                          <span className="text-white/60">/miesiąc</span>
+                        </>
+                      ) : (
+                        <span className="text-3xl font-semibold text-white/90">
+                          {plan.priceText}
+                        </span>
+                      )}
                     </div>
                   </div>
 
@@ -295,7 +281,7 @@ export function PersonalTrainerPricing() {
                     {plan.features.map((feature, featureIndex) => (
                       <motion.div
                         key={featureIndex}
-                        className="flex items-center gap-3 py-1.5"
+                        className="flex items-center gap-3 py-2"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: featureIndex * 0.1 }}
@@ -306,14 +292,18 @@ export function PersonalTrainerPricing() {
                         >
                           <Check className="w-3 h-3 text-green-400" />
                         </div>
-                        <span className="text-white/80 text-sm">{feature}</span>
+                        <span className="text-white/80 text-base">
+                          {feature}
+                        </span>
                       </motion.div>
                     ))}
                   </div>
 
                   {/* CTA Button - always at bottom */}
                   <motion.button
-                    onClick={() => handlePlanSelect(plan.name)}
+                    onClick={() => {
+                      handlePlanSelect(plan.name), scrollTo("contact");
+                    }}
                     className={`w-full py-4 px-6 rounded-full font-medium transition-all mt-auto ${
                       plan.highlight
                         ? "bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white"
@@ -321,7 +311,11 @@ export function PersonalTrainerPricing() {
                     }`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    aria-label={`Wybierz plan ${plan.name} - ${plan.price} złotych miesięcznie`}
+                    aria-label={
+                      plan.showPrice
+                        ? `Wybierz plan ${plan.name} - ${plan.price} złotych miesięcznie`
+                        : `Wybierz plan ${plan.name} - wycena indywidualna`
+                    }
                   >
                     <span className="flex items-center justify-center gap-2">
                       Zacznij teraz
