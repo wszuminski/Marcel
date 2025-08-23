@@ -35,7 +35,7 @@ export default function Footer() {
               aria-label="MK – strona główna"
             >
               <img
-                src="/Logo.svg"
+                src="/Logo.png"
                 alt="Logo"
                 className="flex items-center justify-center h-9 w-9 -mt-4"
               />

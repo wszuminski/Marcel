@@ -62,7 +62,7 @@ export default function Navbar() {
 
           {/* Center Logo */}
           <div className="flex items-center px-6 -mt-2">
-            <img src="/Logo.svg" alt="Logo" className="w-auto h-14" />
+            <img src="/Logo.png" alt="Logo" className="w-auto h-14" />
           </div>
 
           {/* Right Navigation */}

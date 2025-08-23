@@ -24,8 +24,8 @@ const contactMethods = [
     icon: Mail,
     title: "Napisz e-mail",
     description: "Skontaktuj się ze mną przez e-mail",
-    value: "dhileepkumargm@21st.dev",
-    link: "mailto:dhileepkumargm@21st.dev",
+    value: "marcelkaczmarekjj@onet.pl",
+    link: "mailto:marcelkaczmarekjj@onet.pl",
     gradient: "from-blue-500/20 to-cyan-500/20",
     hoverColor: "blue",
   },
@@ -420,7 +420,7 @@ export function PremiumContact() {
                   <div className="relative">
                     <MessageSquare className="absolute left-3 top-4 h-5 w-5 text-white/40" />
                     <textarea
-                      placeholder="Napisz mi swoje cele krótko- i długoterminowe, bądź swoją propozycję — czego byś ode mnie oczekiwał/a (trener personalny)."
+                      placeholder="Napisz mi swoje cele krótko- i długoterminowe, bądź swoją propozycję — czego byś ode mnie oczekiwał/a."
                       rows={6}
                       value={formData.cele}
                       onChange={(e) =>
