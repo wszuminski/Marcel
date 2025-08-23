@@ -20,12 +20,14 @@ export function Hero() {
       </div>
 
       <ParallaxDemo />
-      <ReelsSection />
       {/* <VSLSection /> */}
 
       <About />
       <WhyMeSectionDemo />
+      <ReelsSection />
+
       <GallerySection />
+
       <MetamorphosisSection />
       <Pricing />
       <Testimonials />

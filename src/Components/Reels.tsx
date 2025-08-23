@@ -10,15 +10,15 @@ type Reel = {
 const reels: Reel[] = [
   {
     title: "Dynamika",
-    mp4: "/video1.mp4",
+    mp4: "https://spimywukimroriapcuwj.supabase.co/storage/v1/object/public/videos/video1.mp4",
   },
   {
     title: "Technika",
-    mp4: "/video2.mp4",
+    mp4: "https://spimywukimroriapcuwj.supabase.co/storage/v1/object/public/videos/video2.mp4",
   },
   {
     title: "Mobilność",
-    mp4: "/video3.mp4",
+    mp4: "https://spimywukimroriapcuwj.supabase.co/storage/v1/object/public/videos/video3.mp4",
   },
 ];
 
