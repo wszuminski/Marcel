@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Dumbbell, Trophy, Heart, Users, Target, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 
-// ⭐ tsParticles (React) — lightweight bundle
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 

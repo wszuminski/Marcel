@@ -9,15 +9,15 @@ type Reel = {
 
 const reels: Reel[] = [
   {
-    title: "Siła",
+    title: "Dynamika",
     mp4: "/video1.mp4",
   },
   {
-    title: "Mobilność",
+    title: "Technika",
     mp4: "/video2.mp4",
   },
   {
-    title: "Technika",
+    title: "Mobilność",
     mp4: "/video3.mp4",
   },
 ];
@@ -53,7 +53,7 @@ export default function ReelsSection() {
               viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* Neon glow under the card - removed since we have border glow */}
+              {/* Neon glow under the card - remp4ed since we have border glow */}
 
               {/* Glowing Border Container */}
               <div className="relative rounded-2xl p-[2px] bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500">
