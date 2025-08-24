@@ -91,7 +91,7 @@ export default function Navbar() {
         <div className="flex lg:hidden items-center justify-between h-16 sm:h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <img src="/Logo.svg" alt="Logo" className="w-auto h-10 sm:h-12" />
+            <img src="/Logo.png" alt="Logo" className="w-auto h-10 sm:h-12" />
           </div>
 
           {/* Mobile Menu Button */}
