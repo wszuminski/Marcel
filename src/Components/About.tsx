@@ -56,7 +56,7 @@ export function About() {
     },
     {
       icon: Clock,
-      title: "10+ Lat Doświadczenia",
+      title: "5+ Lat Doświadczenia",
       description:
         "Dekada pracy z klientami na każdym poziomie zaawansowania - od początkujących po zawodowców",
       color: "from-green-500/20 to-green-600/20",
@@ -155,8 +155,9 @@ export function About() {
             </span>
           </h2>
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-            Zmieniam życie poprzez indywidualne podejście do sytuacji od ponad
-            dekady. Każda transformacja to unikalna historia sukcesu.
+            Od lat zmieniam życie moich podopiecznych poprzez indywidualne
+            podejście do osoby. Każda transformacja to unikalna historia
+            sukcesu, który Ty też możesz osiągnąć!
           </p>
         </motion.div>
 
@@ -181,9 +182,6 @@ export function About() {
                 <h3 className="text-3xl font-bold text-white mb-2">
                   Marcel Kaczmarek
                 </h3>
-                <p className="text-purple-400 font-medium">
-                  Master Trainer & Nutrition Coach
-                </p>
               </div>
             </div>
 
@@ -199,38 +197,34 @@ export function About() {
                   Cześć! Jestem Marcel
                 </h3>
                 <p className="text-gray-300 leading-relaxed mb-4">
-                  Sport to moja pasja, która towarzyszy mi od dzieciństwa. Na
-                  początku chciałem zrzucić zbędne kilogramy i podnieść swoją
-                  sprawność. Wszystko zaczęło się na treningach zapasów i
-                  ćwiczeń w domu. Dziś jestem wielokrotnym medalistom mistrzostw
-                  Polski oraz turniei międzynarodowych w zapasach stylu
-                  klasycznym. Moja karierę zapaśnicza skończyłem wraz z ostatnim
-                  medalem w grupie Juniora żeby móc rozwijać się w pełni jako
-                  trener oraz odhaczać kolejne cele sportowe. Uwielbiam trening
-                  siłowy w każdej postaci od ćwiczeń z masą ciała do dźwigania
-                  na siłowni. Wierzę, że każdy zasługuje na to, aby czuć się
-                  silny, zdrowy i pewny siebie.
+                  Sport towarzyszy mi od dzieciństwa i od zawsze był moją
+                  największą pasją. Zaczynałem od prostego celu – chciałem
+                  zrzucić zbędne kilogramy i poprawić swoją sprawność. Moja
+                  przygoda rozpoczęła się na treningach zapasów i od ćwiczeń w
+                  domu. Z czasem sport stał się czymś więcej niż tylko pasją –
+                  zdobyłem wiele medali na mistrzostwach Polski i turniejach
+                  międzynarodowych w zapasach stylu klasycznym. Karierę
+                  zawodniczą zakończyłem na etapie juniora, by w pełni poświęcić
+                  się rozwojowi jako trener i realizować kolejne sportowe cele.
+                  Uwielbiam każdy rodzaj treningu siłowego – od ćwiczeń z masą
+                  ciała, po dźwiganie ciężarów na siłowni. Wierzę, że każdy
+                  zasługuje na to, aby czuć się silnym, zdrowym i pewnym siebie.
                 </p>
                 <p className="text-gray-300 leading-relaxed mb-4">
-                  Ukończyłem studia z zakresu sportu ze specjalizacją trenerską
-                  ze sportów walki. Obecnie kończę studia magisterskie z
-                  przygotowania motorycznego w sporcie. W swoim repertuarze mam
-                  również kursy trenerskie, które zacząłem robić po 17
-                  urodzinach. Wiedzę teoretyczną łączę z ogromnym doświadczeniem
-                  praktycznym oraz ciekawością do sportu. Każdy plan jest tak
-                  unikalny jak twoja sytuacja
-                </p>
-                <p
-                  className="
-                text-gray-300 leading-relaxed mb-4"
-                >
-                  Tu nie chodzi o plan treningowy. Nauczę Cię postrzegać zdrowy
-                  tryb życia inaczej niż robiłeś to dotychczas. Nie chcę żebyś
-                  miał restrykcyjną dietę i niechęć do treningu. Zbudujemy
-                  pozytywny nawyk, który pomoże Ci wprowadzić zmiany w swojej
-                  rutynie dnia. Trening jest dla Ciebie, nie Ty dla niego. Jeśli
-                  nigdy go nie polubiłeś, to znaczy że nikt nie pokazał Ci
-                  treningu DLA CIEBIE.
+                  Ukończyłem studia sportowe ze specjalizacją trenerską w
+                  sportach walki, a obecnie kończę studia magisterskie z
+                  przygotowania motorycznego w sporcie. Już od 17. roku życia
+                  rozwijałem się poprzez kursy trenerskie, łącząc teorię z
+                  ogromnym doświadczeniem praktycznym i nieustanną ciekawością
+                  do świata sportu. Moje podejście nie polega tylko na
+                  rozpisaniu planu treningowego. Chcę pokazać Ci zdrowy tryb
+                  życia w zupełnie inny sposób niż dotychczas. Nie chodzi o
+                  restrykcyjną dietę czy męczące treningi, które szybko
+                  zniechęcają. Razem zbudujemy pozytywne nawyki, które
+                  naturalnie wpasują się w Twój dzień. Trening ma być dla
+                  Ciebie, a nie Ty dla niego. Jeśli do tej pory go nie polubiłeś
+                  – to znaczy, że nikt nie pokazał Ci treningu dopasowanego
+                  właśnie do Ciebie.
                 </p>
               </motion.div>
 
@@ -241,7 +235,7 @@ export function About() {
                   <div className="text-sm text-gray-400">Klientów</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400">10+</div>
+                  <div className="text-3xl font-bold text-purple-400">5+</div>
                   <div className="text-sm text-gray-400">Lat</div>
                 </div>
                 <div className="text-center">

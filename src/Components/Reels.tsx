@@ -10,7 +10,7 @@ type Reel = {
 const reels: Reel[] = [
   {
     title: "Dynamika",
-    mp4: "https://spimywukimroriapcuwj.supabase.co/storage/v1/object/public/videos/video1.mp4",
+    mp4: "https://spimywukimroriapcuwj.supabase.co/storage/v1/object/public/videos/Wideo_1.mp4",
   },
   {
     title: "Technika",
@@ -18,7 +18,7 @@ const reels: Reel[] = [
   },
   {
     title: "Mobilność",
-    mp4: "https://spimywukimroriapcuwj.supabase.co/storage/v1/object/public/videos/video3.mp4",
+    mp4: "https://spimywukimroriapcuwj.supabase.co/storage/v1/object/public/videos/Wideo.mp4",
   },
 ];
 

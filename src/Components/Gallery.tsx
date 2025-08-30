@@ -83,8 +83,7 @@ export function GallerySection() {
               </span>
             </h2>
             <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-              Zobacz efekty pracy moich podopiecznych. Każde zdjęcie to historia
-              determinacji, ciężkiej pracy i osiągniętych celów.
+              Zobacz efekty pracy moich treningów.
             </p>
           </motion.div>
 

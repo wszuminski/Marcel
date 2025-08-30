@@ -30,7 +30,7 @@ interface Achievement {
 
 const stats: Stat[] = [
   { number: "200+", label: "Zadowolonych klientów", icon: Users },
-  { number: "10+", label: "Lat Doświadczenia", icon: Calendar },
+  { number: "5+", label: "Lat Doświadczenia", icon: Calendar },
   { number: "100%", label: "Skuteczność", icon: TrendingUp },
   { number: "24h", label: "Wsparcie Online", icon: Heart },
 ];
@@ -51,13 +51,13 @@ const achievements: Achievement[] = [
   {
     title: "Ekspert kalisteniki",
     description:
-      "Pokarzę Ci jak można wykorzystać własną wagę ciała do osiągnięcia wymarzonej sylwetki jednoczesnie poprawiając sprawność.",
+      "Pokażę Ci jak można wykorzystać własną wagę ciała do osiągnięcia wymarzonej sylwetki jednoczesnie poprawiając sprawność.",
     icon: Shield,
   },
   {
     title: "Stałe wsparcie",
     description:
-      "Stale pomagam udoskonalać technikę, wprowadzać poprawki w diecie i w planach treningowych, aby nadal przynosiły genialne rezultaty",
+      "Stale pomagam udoskonalać technikę, wprowadzając poprawki w diecie i w planach treningowych, aby nadal przynosiły genialne rezultaty",
     icon: Brain,
   },
 ];
